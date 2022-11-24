@@ -1,13 +1,16 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import ReactDOM from 'react-dom/client';
+import { Routes, Route, Navigate, HashRouter as Router } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { AddPage } from './pages/AddPage';
 import { PageNotFound } from './pages/PageNotFound';
 import { App } from './App';
 
-createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
+const root = ReactDOM.createRoot(
+  document.getElementById('root'),
+);
+
+root.render(
+  <Router>
     <Routes>
       <Route path="/" element={<App />}>
         <Route index element={<HomePage />} />
@@ -16,5 +19,5 @@ createRoot(document.getElementById('root')).render(
         <Route path="*" element={<PageNotFound />} />
       </Route>
     </Routes>
-  </BrowserRouter>,
+  </Router>,
 );

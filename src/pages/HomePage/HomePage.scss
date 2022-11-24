@@ -1,12 +1,33 @@
 @import '../../styles/utils/vars';
 
+.chart {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 16px 0;
+
+  &__name {
+    font-size: 24px;
+    line-height: 34px;
+  }
+
+  &__button {
+    background-image: url(../../images/dots-icon.svg);
+    height: 16px;
+    width: 16px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
 .react-grid-layout {
   position: relative;
   transition: height 200ms ease;
 }
 
 .react-grid-item {
-  background-color: $white;
+  background-color: $White;
   transition: all 1000ms ease;
   transition-property: left, top;
   border-radius: 2px;

@@ -1,7 +1,13 @@
-import React from 'react';
-import { useState } from 'react';
-import { WidthProvider, Responsive } from 'react-grid-layout';
+import React, { useState } from 'react';
+import { Responsive, WidthProvider } from 'react-grid-layout';
+import { data } from '../../data/data';
+import { AreaChart } from '../../components/AreaChart';
+import { Link } from 'react-router-dom';
+import { BarChart } from '../../components/BarChart';
+import { PieChart } from '../../components/PieChart';
 import './HomePage.scss';
+import { LineChart } from '../../components/LineChart';
+import { StackedBarChart } from '../../components/StackedBarChart/StackedBarChart';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -38,11 +44,11 @@ export const HomePage = () => {
   );
 
   const arr = [
-    { id: 1, text: 1 },
-    { id: 2, text: 2 },
-    { id: 3, text: 3 },
-    { id: 4, text: 4 },
-    { id: 5, text: 5 },
+    { id: 1, name: 'Area Chart', Component: AreaChart },
+    { id: 2, name: 'Bar Chart', Component: BarChart },
+    { id: 3, name: 'Line Chart', Component: LineChart },
+    { id: 4, name: 'Pie Chart', Component: PieChart },
+    { id: 5, name: 'Stacked Bar Chart', Component: StackedBarChart },
   ];
 
   const onLayoutChange = (_layout, layouts) => {
@@ -50,8 +56,11 @@ export const HomePage = () => {
     setLayouts(layouts);
   };
 
+  const reset = () => setLayouts({});
+
   return (
     <div>
+      <button onClick={reset}>reset</button>
       <ResponsiveReactGridLayout
         className="layout"
         rowHeight={30}
@@ -71,7 +80,13 @@ export const HomePage = () => {
                 minH: 8,
               }}
             >
-              <span>{item.text}</span>
+              <div className="chart">
+                <div className="chart__name">{item.name}</div>
+                <Link to="add" className="chart-link">
+                  <div className="chart__button"></div>
+                </Link>
+              </div>
+              <item.Component data={data} />
             </div>
           );
         })}
