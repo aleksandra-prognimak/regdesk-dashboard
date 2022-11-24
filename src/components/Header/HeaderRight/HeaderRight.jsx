@@ -9,7 +9,9 @@ export const HeaderRight = () => {
         <div className="header__date-name">Serve time</div>
         <div className="header__date-time">{date}</div>
       </div>
-      <div className="header__bell"></div>
+      <div className="header__bell">
+        <div className="header__bell-mail">13</div>
+      </div>
       <div className="header__lang">
         <div className="header__lang-icon"></div>
         <div className="header__lang-name">EN-GB</div>

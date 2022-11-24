@@ -49,6 +49,18 @@
     background-position: center;
     background-repeat: no-repeat;
     margin-right: 34px;
+    position: relative;
+
+    &-mail {
+      background: $MainRed;
+      color: $White;
+      border-radius: 20px;
+      width: 24px;
+      height: 16px;
+      left: 12px;
+      top: -4px;
+      position: absolute;
+    }
   }
 
   &__date {
