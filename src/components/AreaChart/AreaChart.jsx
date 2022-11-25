@@ -7,6 +7,42 @@ export const AreaChart = ({ data }) => {
   const seriesRef = useRef(null);
   const xAxisRef = useRef(null);
 
+  const createdAt = data.trackings.map((item) => item.createdAt.slice(0, 4));
+  const updatedAt = data.trackings.map((item) => item.updatedAt.slice(0, 4));
+  const dataProductsCreated = [];
+  const dataProductsUpdated = [];
+
+  for (const i of createdAt) {
+    if (!dataProductsCreated.find((item) => item.createdAt.slice(0, 4) === i)) {
+      dataProductsCreated.push({
+        id: dataProductsCreated.length,
+        createdAt: i,
+        trackings: 1,
+      });
+    } else {
+      dataProductsCreated.map(
+        (item) => item.createdAt.slice(0, 4) === i && item.trackings++,
+      );
+    }
+  }
+
+  for (const i of updatedAt) {
+    if (!dataProductsUpdated.find((item) => item.updatedAt.slice(0, 4) === i)) {
+      dataProductsUpdated.push({
+        id: dataProductsUpdated.length,
+        updatedAt: i,
+        trackings: 1,
+      });
+    } else {
+      dataProductsUpdated.map(
+        (item) => item.updatedAt.slice(0, 4) === i && item.trackings++,
+      );
+    }
+  }
+
+  dataProductsCreated.sort((a, b) => a.createdAt - b.createdAt);
+  dataProductsUpdated.sort((a, b) => a.updatedAt - b.updatedAt);
+
   useLayoutEffect(() => {
     const root = am5.Root.new("areachart");
 
@@ -30,21 +66,21 @@ export const AreaChart = ({ data }) => {
     const xAxis = chart.xAxes.push(
       am5xy.CategoryAxis.new(root, {
         renderer: am5xy.AxisRendererX.new(root, {}),
-        categoryField: "name"
+        categoryField: "updatedAt"
       })
     );
 
     xAxis.data.setAll([{
-      category: "name"
+      category: "updatedAt"
     }]);
 
     const series = chart.series.push(
       am5xy.LineSeries.new(root, {
-        name: "kindergartens",
+        name: "Trackings",
         xAxis,
         yAxis,
-        valueYField: "kindergartens",
-        categoryXField: "name",
+        valueYField: "trackings",
+        categoryXField: "updatedAt",
         stroke: am5.color(0x76cadd),
         fill: am5.color(0x76cadd),
         tooltip: am5.Tooltip.new(root, {
@@ -74,9 +110,9 @@ export const AreaChart = ({ data }) => {
   }, []);
 
   useLayoutEffect(() => {
-    xAxisRef.current.data.setAll(data);
-    seriesRef.current.data.setAll(data);
-  }, [data]);
+    xAxisRef.current.data.setAll(dataProductsUpdated);
+    seriesRef.current.data.setAll(dataProductsUpdated);
+  }, [dataProductsUpdated]);
 
   return <div id="areachart" style={{ width: "100%", height: "85%" }}></div>;
 };

@@ -7,6 +7,37 @@ export const BarChart = ({ data }) => {
   const seriesRef = useRef(null);
   const xAxisRef = useRef(null);
 
+  const dataFilter = data.products.filter(
+    (item) =>
+      item.sku
+      && item.sku.length > 0
+      && item.sku[0].countries
+      && item.sku[0].countries.length > 0,
+  );
+
+  const countries = [];
+  const dataProducts = [];
+
+  for (const i of dataFilter) {
+    for (const j of i.sku[0].countries) {
+      countries.push(j);
+    }
+  }
+
+  for (const i of countries) {
+    if (!dataProducts.find((item) => item.country === i)) {
+      dataProducts.push({
+        id: dataProducts.length,
+        country: i,
+        products: 1,
+      });
+    } else {
+      dataProducts.map((item) => item.country === i && item.products++);
+    }
+  }
+
+  const dataFilterProducts = dataProducts.filter(item => item.products > 3);
+
   useLayoutEffect(() => {
     const root = am5.Root.new("barchart");
 
@@ -30,22 +61,22 @@ export const BarChart = ({ data }) => {
     const xAxis = chart.xAxes.push(
       am5xy.CategoryAxis.new(root, {
         renderer: am5xy.AxisRendererX.new(root, {}),
-        categoryField: "name"
+        categoryField: "country"
       })
     );
 
     xAxis.data.setAll([{
-      category: "name"
+      category: "country"
     }]);
 
     const series = chart.series.push(
       am5xy.ColumnSeries.new(root, {
-        name: "schools",
+        name: "Products",
         xAxis,
         yAxis,
-        valueYField: "schools",
-        categoryXField: "name",
-        fill: am5.color(0x76cadd),
+        valueYField: "products",
+        categoryXField: "country",
+        fill: am5.color(0xf8c33a),
         tooltip: am5.Tooltip.new(root, {
           labelText: "{name}[/]\n{valueX} {valueY}"
         })
@@ -68,9 +99,9 @@ export const BarChart = ({ data }) => {
   }, []);
 
   useLayoutEffect(() => {
-    xAxisRef.current.data.setAll(data);
-    seriesRef.current.data.setAll(data);
-  }, [data]);
+    xAxisRef.current.data.setAll(dataFilterProducts);
+    seriesRef.current.data.setAll(dataFilterProducts);
+  }, [dataFilterProducts]);
 
   return <div id="barchart" style={{ width: "100%", height: "85%" }}></div>;
 };

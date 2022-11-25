@@ -44,11 +44,11 @@ export const HomePage = () => {
   );
 
   const arr = [
-    { id: 1, name: 'Area Chart', Component: AreaChart },
-    { id: 2, name: 'Bar Chart', Component: BarChart },
-    { id: 3, name: 'Line Chart', Component: LineChart },
-    { id: 4, name: 'Pie Chart', Component: PieChart },
-    { id: 5, name: 'Stacked Bar Chart', Component: StackedBarChart },
+    { id: 5, name: 'Trackings', Component: StackedBarChart },
+    { id: 4, name: 'Products', Component: PieChart },
+    { id: 2, name: 'Products', Component: BarChart },
+    { id: 1, name: 'Checklists', Component: AreaChart },
+    { id: 3, name: 'Applications', Component: LineChart },
   ];
 
   const onLayoutChange = (_layout, layouts) => {

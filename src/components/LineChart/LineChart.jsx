@@ -7,6 +7,23 @@ export const LineChart = ({ data }) => {
   const seriesRef = useRef(null);
   const xAxisRef = useRef(null);
 
+  const countries = [];
+  const dataApCountries = [];
+
+  data.applications.map((item) => countries.push(item.country));
+
+  for (const i of countries) {
+    if (!dataApCountries.find((item) => item.country === i)) {
+      dataApCountries.push({
+        id: dataApCountries.length,
+        country: i,
+        applications: 1,
+      });
+    } else {
+      dataApCountries.map((item) => item.country === i && item.applications++);
+    }
+  }
+
   useLayoutEffect(() => {
     const root = am5.Root.new('linechart');
 
@@ -30,26 +47,26 @@ export const LineChart = ({ data }) => {
     const xAxis = chart.xAxes.push(
       am5xy.CategoryAxis.new(root, {
         renderer: am5xy.AxisRendererX.new(root, {}),
-        categoryField: 'name',
+        categoryField: 'country',
       }),
     );
 
     xAxis.data.setAll([
       {
-        category: 'name',
+        category: 'country',
       },
     ]);
 
     const series = chart.series.push(
       am5xy.LineSeries.new(root, {
-        name: 'universities',
+        name: 'Applications',
         xAxis,
         yAxis,
-        valueYField: 'universities',
-        categoryXField: 'name',
-        stroke: am5.color(0x76cadd),
+        valueYField: 'applications',
+        categoryXField: 'country',
+        stroke: am5.color(0xf16f12),
         tooltip: am5.Tooltip.new(root, {
-          labelText: '{name}[/]\n{valueX} {valueY}',
+          labelText: '{name}:[/]\n{valueX} {valueY}',
         }),
       }),
     );
@@ -71,9 +88,9 @@ export const LineChart = ({ data }) => {
   }, []);
 
   useLayoutEffect(() => {
-    xAxisRef.current.data.setAll(data);
-    seriesRef.current.data.setAll(data);
-  }, [data]);
+    xAxisRef.current.data.setAll(dataApCountries);
+    seriesRef.current.data.setAll(dataApCountries);
+  }, [dataApCountries]);
 
   return <div id="linechart" style={{ width: '100%', height: '85%' }}></div>;
 };
