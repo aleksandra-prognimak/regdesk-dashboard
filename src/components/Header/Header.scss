@@ -113,6 +113,10 @@
       background-color: $SecondaryNavyBlue;
     }
 
+    &:active {
+      background-color: $MainNavyBlue;
+    }
+
     &-link {
       display: flex;
       justify-content: center;

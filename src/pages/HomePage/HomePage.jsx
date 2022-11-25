@@ -59,7 +59,13 @@ export const HomePage = () => {
   const reset = () => setLayouts({});
 
   return (
-    <div>
+    <>
+      <div className="info">
+        <div className="info__name">Dashboard</div>
+        <Link to="add" className="info__link">
+          <div className="info__link-button">Add Widget</div>
+        </Link>
+      </div>
       <button onClick={reset}>reset</button>
       <ResponsiveReactGridLayout
         className="layout"
@@ -91,6 +97,6 @@ export const HomePage = () => {
           );
         })}
       </ResponsiveReactGridLayout>
-    </div>
+    </>
   );
 };
