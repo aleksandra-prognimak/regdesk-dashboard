@@ -13,7 +13,11 @@ export const PieChart = ({ data }) => {
   const newData = [
     { name: 'Kyiv', value: getSum('Kyiv', data) },
     { name: 'Kharkiv', value: getSum('Kharkiv', data) },
-    { name: 'Odessa', value: getSum('Odessa', data) },
+    { name: 'Uzhgorod', value: getSum('Uzhgorod', data) },
+    { name: 'Odessa', value: getSum('Odessa', data) }, 
+    { name: 'Poltava', value: getSum('Poltava', data) },
+    { name: 'Kherson', value: getSum('Kherson', data) },
+    { name: 'Lviv', value: getSum('Lviv', data) },
   ];
 
   useLayoutEffect(() => {
@@ -26,8 +30,9 @@ export const PieChart = ({ data }) => {
     const chart = root.container.children.push(
       am5percent.PieChart.new(root, {
         layout: root.verticalLayout,
-        radius: am5.percent(50),
-        y: am5.percent(-15),
+        radius: am5.percent(70),
+        x: am5.percent(10),
+        y: am5.percent(0),
       }),
     );
 
@@ -35,24 +40,31 @@ export const PieChart = ({ data }) => {
       am5percent.PieSeries.new(root, {
         valueField: 'value',
         categoryField: 'name',
-        legendLabelText: '[{fill}]{category}[/]',
-        legendValueText: '[bold {fill}]{value}[/]',
+        legendValueText: '',
       }),
     );
 
+    series.get("colors").set("colors", [
+      am5.color(0x005594),
+      am5.color(0x3b8fb8),
+      am5.color(0x76cadd),
+      am5.color(0xacdfea),
+      am5.color(0xc8e9f1),
+      am5.color(0xffdc60),
+      am5.color(0xf8c33a),
+      am5.color(0xf49926),
+      am5.color(0xf16f12),
+      am5.color(0xec4719),
+      am5.color(0xe71e20),
+    ]);
     series.data.setAll(newData);
     series.labels.template.set('forceHidden', true);
     series.ticks.template.set('forceHidden', true);
-    series.set("colors", [
-      am5.color(0x005594), // поки що не працює
-      am5.color(0x3b8fb8),
-      am5.color(0x76cadd)
-    ]);
 
     const legend = chart.children.push(
       am5.Legend.new(root, {
         centerY: am5.percent(30),
-        y: am5.percent(60),
+        y: am5.percent(25),
         layout: root.verticalLayout,
       }),
     );

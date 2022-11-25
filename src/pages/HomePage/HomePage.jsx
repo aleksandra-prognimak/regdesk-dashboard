@@ -76,7 +76,7 @@ export const HomePage = () => {
                 h: 8,
                 x: (index % 3) * 4,
                 y: Math.floor(index / 3),
-                minW: 2,
+                minW: 4,
                 minH: 8,
               }}
             >
