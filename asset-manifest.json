@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/regdesk-dashboard/static/css/main.77f773ce.css",
-    "main.js": "/regdesk-dashboard/static/js/main.40a2cebd.js",
+    "main.js": "/regdesk-dashboard/static/js/main.f365678a.js",
     "static/media/logo.svg": "/regdesk-dashboard/static/media/logo.900de5642e4ab9566e20.svg",
     "static/media/bell-icon.svg": "/regdesk-dashboard/static/media/bell-icon.fefd5c84d69962d08183.svg",
     "static/media/user-icon.svg": "/regdesk-dashboard/static/media/user-icon.7ef37baa724082365b87.svg",
@@ -10,10 +10,10 @@
     "static/media/dots-icon.svg": "/regdesk-dashboard/static/media/dots-icon.911269b7090ca5437725.svg",
     "static/media/lang-icon.svg": "/regdesk-dashboard/static/media/lang-icon.94b0daceabc93ab2936d.svg",
     "main.77f773ce.css.map": "/regdesk-dashboard/static/css/main.77f773ce.css.map",
-    "main.40a2cebd.js.map": "/regdesk-dashboard/static/js/main.40a2cebd.js.map"
+    "main.f365678a.js.map": "/regdesk-dashboard/static/js/main.f365678a.js.map"
   },
   "entrypoints": [
     "static/css/main.77f773ce.css",
-    "static/js/main.40a2cebd.js"
+    "static/js/main.f365678a.js"
   ]
 }
