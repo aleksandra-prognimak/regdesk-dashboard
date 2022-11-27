@@ -36,7 +36,7 @@ export const BarChart = ({ data }) => {
     }
   }
 
-  const dataFilterProducts = dataProducts.filter((item) => item.products > 3);
+  const dataFilterProducts = dataProducts.filter((item) => item.products > 4);
 
   useLayoutEffect(() => {
     const root = am5.Root.new('barchart');
@@ -60,7 +60,7 @@ export const BarChart = ({ data }) => {
 
     const xAxis = chart.xAxes.push(
       am5xy.CategoryAxis.new(root, {
-        renderer: am5xy.AxisRendererX.new(root, {}),
+        renderer: am5xy.AxisRendererX.new(root, { minGridDistance: 20 }),
         categoryField: 'country',
       }),
     );

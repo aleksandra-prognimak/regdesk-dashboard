@@ -65,7 +65,7 @@ export const AreaChart = ({ data }) => {
 
     const xAxis = chart.xAxes.push(
       am5xy.CategoryAxis.new(root, {
-        renderer: am5xy.AxisRendererX.new(root, {}),
+        renderer: am5xy.AxisRendererX.new(root, { minGridDistance: 20 }),
         categoryField: 'updatedAt',
       }),
     );

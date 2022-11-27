@@ -24,6 +24,8 @@ export const LineChart = ({ data }) => {
     }
   }
 
+  const dataApFilter = dataApCountries.filter(item => item.applications > 3);
+
   useLayoutEffect(() => {
     const root = am5.Root.new('linechart');
 
@@ -46,7 +48,7 @@ export const LineChart = ({ data }) => {
 
     const xAxis = chart.xAxes.push(
       am5xy.CategoryAxis.new(root, {
-        renderer: am5xy.AxisRendererX.new(root, {}),
+        renderer: am5xy.AxisRendererX.new(root, { minGridDistance: 20 }),
         categoryField: 'country',
       }),
     );
@@ -88,9 +90,9 @@ export const LineChart = ({ data }) => {
   }, []);
 
   useLayoutEffect(() => {
-    xAxisRef.current.data.setAll(dataApCountries);
-    seriesRef.current.data.setAll(dataApCountries);
-  }, [dataApCountries]);
+    xAxisRef.current.data.setAll(dataApFilter);
+    seriesRef.current.data.setAll(dataApFilter);
+  }, [dataApFilter]);
 
   return <div id="linechart" style={{ width: '100%', height: '85%' }}></div>;
 };

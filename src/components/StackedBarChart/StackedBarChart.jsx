@@ -39,7 +39,7 @@ export const StackedBarChart = ({ data }) => {
   }
 
   const dataChecklists = dataCLCountries.filter(
-    (item) => item.preparing > 4 || item.inProgress > 4 || item.approved > 4,
+    (item) => item.preparing > 2 && item.inProgress > 2 && item.approved > 2,
   );
 
   useLayoutEffect(() => {
@@ -64,7 +64,7 @@ export const StackedBarChart = ({ data }) => {
 
     const xAxis = chart.xAxes.push(
       am5xy.CategoryAxis.new(root, {
-        renderer: am5xy.AxisRendererX.new(root, {}),
+        renderer: am5xy.AxisRendererX.new(root, { minGridDistance: 20 }),
         categoryField: 'country',
       }),
     );
