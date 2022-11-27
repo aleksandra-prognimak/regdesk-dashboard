@@ -1,7 +1,7 @@
-import React, { useLayoutEffect, useRef } from "react";
-import * as am5 from "@amcharts/amcharts5";
-import * as am5xy from "@amcharts/amcharts5/xy";
-import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
+import React, { useLayoutEffect, useRef } from 'react';
+import * as am5 from '@amcharts/amcharts5';
+import * as am5xy from '@amcharts/amcharts5/xy';
+import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
 
 export const AreaChart = ({ data }) => {
   const seriesRef = useRef(null);
@@ -44,7 +44,7 @@ export const AreaChart = ({ data }) => {
   dataProductsUpdated.sort((a, b) => a.updatedAt - b.updatedAt);
 
   useLayoutEffect(() => {
-    const root = am5.Root.new("areachart");
+    const root = am5.Root.new('areachart');
 
     root._logo.dispose();
 
@@ -53,52 +53,54 @@ export const AreaChart = ({ data }) => {
     const chart = root.container.children.push(
       am5xy.XYChart.new(root, {
         panY: false,
-        layout: root.verticalLayout
-      })
+        layout: root.verticalLayout,
+      }),
     );
 
     const yAxis = chart.yAxes.push(
       am5xy.ValueAxis.new(root, {
-        renderer: am5xy.AxisRendererY.new(root, {})
-      })
+        renderer: am5xy.AxisRendererY.new(root, {}),
+      }),
     );
 
     const xAxis = chart.xAxes.push(
       am5xy.CategoryAxis.new(root, {
         renderer: am5xy.AxisRendererX.new(root, {}),
-        categoryField: "updatedAt"
-      })
+        categoryField: 'updatedAt',
+      }),
     );
 
-    xAxis.data.setAll([{
-      category: "updatedAt"
-    }]);
+    xAxis.data.setAll([
+      {
+        category: 'updatedAt',
+      },
+    ]);
 
     const series = chart.series.push(
       am5xy.LineSeries.new(root, {
-        name: "Trackings",
+        name: 'Trackings',
         xAxis,
         yAxis,
-        valueYField: "trackings",
-        categoryXField: "updatedAt",
+        valueYField: 'trackings',
+        categoryXField: 'updatedAt',
         stroke: am5.color(0x76cadd),
         fill: am5.color(0x76cadd),
         tooltip: am5.Tooltip.new(root, {
-          labelText: "{name}[/]\n{valueX} {valueY}"
-        })
-      })
+          labelText: '{name}[/]\n{valueX} {valueY}',
+        }),
+      }),
     );
 
     series.fills.template.setAll({
       fillOpacity: 0.5,
-      visible: true
+      visible: true,
     });
 
     const legend = chart.children.push(am5.Legend.new(root, {}));
 
     legend.data.setAll(chart.series.values);
 
-    chart.set("cursor", am5xy.XYCursor.new(root, {}));
+    chart.set('cursor', am5xy.XYCursor.new(root, {}));
 
     xAxisRef.current = xAxis;
     seriesRef.current = series;
@@ -114,5 +116,5 @@ export const AreaChart = ({ data }) => {
     seriesRef.current.data.setAll(dataProductsUpdated);
   }, [dataProductsUpdated]);
 
-  return <div id="areachart" style={{ width: "100%", height: "85%" }}></div>;
+  return <div id="areachart" style={{ width: '100%', height: '85%' }}></div>;
 };

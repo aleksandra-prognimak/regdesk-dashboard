@@ -1,7 +1,7 @@
-import React, { useLayoutEffect, useRef } from "react";
-import * as am5 from "@amcharts/amcharts5";
-import * as am5xy from "@amcharts/amcharts5/xy";
-import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
+import React, { useLayoutEffect, useRef } from 'react';
+import * as am5 from '@amcharts/amcharts5';
+import * as am5xy from '@amcharts/amcharts5/xy';
+import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
 
 export const BarChart = ({ data }) => {
   const seriesRef = useRef(null);
@@ -36,10 +36,10 @@ export const BarChart = ({ data }) => {
     }
   }
 
-  const dataFilterProducts = dataProducts.filter(item => item.products > 3);
+  const dataFilterProducts = dataProducts.filter((item) => item.products > 3);
 
   useLayoutEffect(() => {
-    const root = am5.Root.new("barchart");
+    const root = am5.Root.new('barchart');
 
     root._logo.dispose();
 
@@ -48,46 +48,48 @@ export const BarChart = ({ data }) => {
     const chart = root.container.children.push(
       am5xy.XYChart.new(root, {
         panY: false,
-        layout: root.verticalLayout
-      })
+        layout: root.verticalLayout,
+      }),
     );
 
     const yAxis = chart.yAxes.push(
       am5xy.ValueAxis.new(root, {
-        renderer: am5xy.AxisRendererY.new(root, {})
-      })
+        renderer: am5xy.AxisRendererY.new(root, {}),
+      }),
     );
 
     const xAxis = chart.xAxes.push(
       am5xy.CategoryAxis.new(root, {
         renderer: am5xy.AxisRendererX.new(root, {}),
-        categoryField: "country"
-      })
+        categoryField: 'country',
+      }),
     );
 
-    xAxis.data.setAll([{
-      category: "country"
-    }]);
+    xAxis.data.setAll([
+      {
+        category: 'country',
+      },
+    ]);
 
     const series = chart.series.push(
       am5xy.ColumnSeries.new(root, {
-        name: "Products",
+        name: 'Products',
         xAxis,
         yAxis,
-        valueYField: "products",
-        categoryXField: "country",
+        valueYField: 'products',
+        categoryXField: 'country',
         fill: am5.color(0xf8c33a),
         tooltip: am5.Tooltip.new(root, {
-          labelText: "{name}[/]\n{valueX} {valueY}"
-        })
-      })
+          labelText: '{name}[/]\n{valueX} {valueY}',
+        }),
+      }),
     );
 
     const legend = chart.children.push(am5.Legend.new(root, {}));
 
     legend.data.setAll(chart.series.values);
 
-    chart.set("cursor", am5xy.XYCursor.new(root, {}));
+    chart.set('cursor', am5xy.XYCursor.new(root, {}));
 
     xAxisRef.current = xAxis;
     seriesRef.current = series;
@@ -103,5 +105,5 @@ export const BarChart = ({ data }) => {
     seriesRef.current.data.setAll(dataFilterProducts);
   }, [dataFilterProducts]);
 
-  return <div id="barchart" style={{ width: "100%", height: "85%" }}></div>;
+  return <div id="barchart" style={{ width: '100%', height: '85%' }}></div>;
 };

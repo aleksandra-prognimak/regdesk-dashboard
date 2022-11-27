@@ -3,12 +3,6 @@ import * as am5 from '@amcharts/amcharts5';
 import * as am5percent from '@amcharts/amcharts5/percent';
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
 
-const getSum = (city, d) => {
-  const findCity = d.find((item) => item.name === city);
-
-  return findCity.kindergartens + findCity.schools + findCity.universities;
-};
-
 export const PieChart = ({ data }) => {
   const createdAt = data.products.map((item) => item.createdAt.slice(0, 4));
   const dataProducts = [];

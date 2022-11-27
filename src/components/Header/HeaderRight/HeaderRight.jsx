@@ -1,12 +1,21 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export const HeaderRight = () => {
-  const date = new Date().toLocaleString();
+  const [date, setDate] = useState();
+
+  useEffect(() => {
+    setInterval(() => {
+      const newDate = new Date();
+
+      setDate(newDate.toLocaleString());
+    });
+  });
 
   return (
     <div className="header__right">
       <div className="header__date">
-        <div className="header__date-name">Serve time</div>
+        <div className="header__date-name">Server time</div>
         <div className="header__date-time">{date}</div>
       </div>
       <div className="header__bell">

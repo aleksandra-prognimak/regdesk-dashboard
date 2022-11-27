@@ -1,13 +1,16 @@
 import ReactDOM from 'react-dom/client';
-import { Routes, Route, Navigate, HashRouter as Router } from 'react-router-dom';
+import {
+  Routes,
+  Route,
+  Navigate,
+  HashRouter as Router,
+} from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { AddPage } from './pages/AddPage';
 import { PageNotFound } from './pages/PageNotFound';
 import { App } from './App';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root'),
-);
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <Router>

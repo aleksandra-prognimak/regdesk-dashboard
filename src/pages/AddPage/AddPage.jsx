@@ -1,3 +1,1 @@
-export const AddPage = () => (
-  <h1>Add Page</h1>
-);
+export const AddPage = () => <h1>Add Page</h1>;
