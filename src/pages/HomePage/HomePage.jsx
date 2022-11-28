@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import { data } from '../../data/data';
-import { AreaChart } from '../../components/AreaChart';
 import { Link } from 'react-router-dom';
-import { BarChart } from '../../components/BarChart';
-import { PieChart } from '../../components/PieChart';
 import './HomePage.scss';
-import { LineChart } from '../../components/LineChart';
-import { StackedBarChart } from '../../components/StackedBarChart/StackedBarChart';
+import { Chart } from '../../components/Chart';
+//import Dropdown from 'react-bootstrap/Dropdown';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -38,18 +35,10 @@ const saveToLS = (key, value) => {
 
 const originalLayouts = getFromLS('layouts') || {};
 
-export const HomePage = () => {
+export const HomePage = ({ charts, updateChart, selectedId, setSelectedId, deleteChart }) => {
   const [layouts, setLayouts] = useState(
     JSON.parse(JSON.stringify(originalLayouts)),
   );
-
-  const arr = [
-    { id: 5, name: 'Trackings', Component: StackedBarChart },
-    { id: 4, name: 'Products', Component: PieChart },
-    { id: 2, name: 'Products', Component: BarChart },
-    { id: 1, name: 'Checklists', Component: AreaChart },
-    { id: 3, name: 'Applications', Component: LineChart },
-  ];
 
   const onLayoutChange = (_layout, layouts) => {
     saveToLS('layouts', layouts);
@@ -57,6 +46,13 @@ export const HomePage = () => {
   };
 
   const reset = () => setLayouts({});
+
+  const [dropdownState, setDropdownState] = useState(false);
+
+  const handleDropdownClick = (id) => {
+    setSelectedId(id);
+    setDropdownState(!dropdownState);
+  };
 
   return (
     <>
@@ -73,7 +69,7 @@ export const HomePage = () => {
         layouts={layouts}
         onLayoutChange={(layout, layouts) => onLayoutChange(layout, layouts)}
       >
-        {arr.map((item, index) => {
+        {charts.map((item, index) => {
           return (
             <div
               key={item.id}
@@ -88,11 +84,40 @@ export const HomePage = () => {
             >
               <div className="chart">
                 <div className="chart__name">{item.name}</div>
-                <Link to="add" className="chart-link">
-                  <div className="chart__button"></div>
-                </Link>
+
+                <div className="chart-link">
+                  <div
+                    onClick={() => handleDropdownClick(item.id)}
+                    className="chart__button"
+                  ></div>
+                  <div
+                    className={`dropdown-items ${
+                      dropdownState && selectedId === item.id
+                        ? 'isVisible'
+                        : 'isHidden'
+                    }`}
+                  >
+                    <div className="dropdown-item">
+                      <Link
+                        to="add"
+                        className="dropdown__link"
+                        onClick={() => updateChart(item.id)}
+                      >
+                        Update
+                      </Link>
+                    </div>
+                    <div className="dropdown-item">
+                      <div
+                        className="dropdown__link"
+                        onClick={() => deleteChart(item.id)}
+                      >
+                        Delete
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <item.Component data={data} />
+              <Chart item={item} data={data} updateChart={updateChart} />
             </div>
           );
         })}

@@ -33,9 +33,9 @@ export const PieChart = ({ data }) => {
     const chart = root.container.children.push(
       am5percent.PieChart.new(root, {
         layout: root.verticalLayout,
-        radius: am5.percent(70),
+        radius: am5.percent(160),
         x: am5.percent(10),
-        y: am5.percent(0),
+        y: am5.percent(25),
       }),
     );
 
@@ -69,7 +69,7 @@ export const PieChart = ({ data }) => {
     const legend = chart.children.push(
       am5.Legend.new(root, {
         centerY: am5.percent(30),
-        y: am5.percent(25),
+        y: am5.percent(10),
         layout: root.verticalLayout,
       }),
     );
@@ -82,5 +82,5 @@ export const PieChart = ({ data }) => {
     };
   }, []);
 
-  return <div id={'piechart'} style={{ width: '100%', height: '400px' }}></div>;
+  return <div id={'piechart'} style={{ width: '100%', height: '85%' }}></div>;
 };
