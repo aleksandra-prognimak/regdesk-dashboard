@@ -15,10 +15,10 @@ import { useState } from 'react';
 export const App = () => {
   const [charts, setCharts] = useState([
     //{ id: 5, name: 'Checklists', Component: StackedBarChart },
-    { id: 4, name: 'Products', Component: PieChart },
-    { id: 2, name: 'Products', Component: BarChart },
-    { id: 1, name: 'Trackings', Component: AreaChart },
-    { id: 3, name: 'Applications', Component: LineChart },
+    { id: 4, name: 'Products', Component: PieChart, x: 'products', y: 'country' },
+    { id: 2, name: 'Products', Component: BarChart, x: 'products', y: 'country' },
+    { id: 1, name: 'Trackings', Component: AreaChart, x: 'trackings', y: 'createdAt' },
+    { id: 3, name: 'Applications', Component: LineChart, x: 'applications', y: 'country' },
   ]);
   const [updatedChart, setUpdatedChart] = useState([]);
   const [selectedId, setSelectedId] = useState(0);

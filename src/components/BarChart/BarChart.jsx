@@ -3,7 +3,7 @@ import * as am5 from '@amcharts/amcharts5';
 import * as am5xy from '@amcharts/amcharts5/xy';
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
 
-export const BarChart = ({ data }) => {
+export const BarChart = ({ data, item }) => {
   const seriesRef = useRef(null);
   const xAxisRef = useRef(null);
 
@@ -38,6 +38,51 @@ export const BarChart = ({ data }) => {
 
   const dataFilterProducts = dataProducts.filter((item) => item.products > 4);
 
+  const createdAt = data.products.map((item) => item.createdAt.slice(0, 4));
+  const updatedAt = data.products.map((item) => item.updatedAt.slice(0, 4));
+  const dataProductsCreatedAt = [];
+  const dataProductsUpdatedAt = [];
+
+  for (const i of createdAt) {
+    if (!dataProductsCreatedAt.find((item) => item.createdAt.slice(0, 4) === i)) {
+      dataProductsCreatedAt.push({
+        id: dataProductsCreatedAt.length,
+        createdAt: i,
+        products: 1,
+      });
+    } else {
+      dataProductsCreatedAt.map(
+        (item) => item.createdAt.slice(0, 4) === i && item.products++,
+      );
+    }
+  }
+
+  for (const i of updatedAt) {
+    if (!dataProductsUpdatedAt.find((item) => item.updatedAt.slice(0, 4) === i)) {
+      dataProductsUpdatedAt.push({
+        id: dataProductsUpdatedAt.length,
+        updatedAt: i,
+        products: 1,
+      });
+    } else {
+      dataProductsUpdatedAt.map(
+        (item) => item.updatedAt.slice(0, 4) === i && item.products++,
+      );
+    }
+  }
+
+  dataProductsCreatedAt.sort((a, b) => a.createdAt - b.createdAt);
+  dataProductsUpdatedAt.sort((a, b) => a.updatedAt - b.updatedAt);
+  let newDataProducts = [];
+
+  if (item.y === 'createdAt') {
+    newDataProducts = dataProductsCreatedAt;
+  } else if (item.y === 'updatedAt') {
+    newDataProducts = dataProductsUpdatedAt;
+  } else {
+    newDataProducts = dataFilterProducts;
+  }
+
   useLayoutEffect(() => {
     const root = am5.Root.new('barchart');
 
@@ -61,23 +106,23 @@ export const BarChart = ({ data }) => {
     const xAxis = chart.xAxes.push(
       am5xy.CategoryAxis.new(root, {
         renderer: am5xy.AxisRendererX.new(root, { minGridDistance: 20 }),
-        categoryField: 'country',
+        categoryField: item.y,
       }),
     );
 
     xAxis.data.setAll([
       {
-        category: 'country',
+        category: item.y,
       },
     ]);
 
     const series = chart.series.push(
       am5xy.ColumnSeries.new(root, {
-        name: 'Products',
+        name: item.name,
         xAxis,
         yAxis,
-        valueYField: 'products',
-        categoryXField: 'country',
+        valueYField: item.x,
+        categoryXField: item.y,
         fill: am5.color(0xf8c33a),
         tooltip: am5.Tooltip.new(root, {
           labelText: '{name}[/]\n{valueX} {valueY}',
@@ -101,9 +146,9 @@ export const BarChart = ({ data }) => {
   }, []);
 
   useLayoutEffect(() => {
-    xAxisRef.current.data.setAll(dataFilterProducts);
-    seriesRef.current.data.setAll(dataFilterProducts);
-  }, [dataFilterProducts]);
+    xAxisRef.current.data.setAll(newDataProducts);
+    seriesRef.current.data.setAll(newDataProducts);
+  }, [newDataProducts]);
 
   return <div id="barchart" style={{ width: '100%', height: '85%' }}></div>;
 };

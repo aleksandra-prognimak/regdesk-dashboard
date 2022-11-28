@@ -3,45 +3,74 @@ import * as am5 from '@amcharts/amcharts5';
 import * as am5xy from '@amcharts/amcharts5/xy';
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
 
-export const AreaChart = ({ data }) => {
+export const AreaChart = ({ data, item }) => {
   const seriesRef = useRef(null);
   const xAxisRef = useRef(null);
 
+  const countries = [];
+  const dataTrackingCountries = [];
+
+  data.trackings.map((item) => countries.push(item.countryId));
+
+  for (const i of countries) {
+    if (!dataTrackingCountries.find((item) => item.country === i)) {
+      dataTrackingCountries.push({
+        id: dataTrackingCountries.length,
+        country: i,
+        trackings: 1,
+      });
+    } else {
+      dataTrackingCountries.map((item) => item.country === i && item.trackings++);
+    }
+  }
+
+  const dataTrackingFilter = dataTrackingCountries.filter(item => item.trackings > 3);
+
   const createdAt = data.trackings.map((item) => item.createdAt.slice(0, 4));
   const updatedAt = data.trackings.map((item) => item.updatedAt.slice(0, 4));
-  const dataProductsCreated = [];
-  const dataProductsUpdated = [];
+  const dataTrackingCreatedAt = [];
+  const dataTrackingUpdatedAt = [];
 
   for (const i of createdAt) {
-    if (!dataProductsCreated.find((item) => item.createdAt.slice(0, 4) === i)) {
-      dataProductsCreated.push({
-        id: dataProductsCreated.length,
+    if (!dataTrackingCreatedAt.find((item) => item.createdAt.slice(0, 4) === i)) {
+      dataTrackingCreatedAt.push({
+        id: dataTrackingCreatedAt.length,
         createdAt: i,
         trackings: 1,
       });
     } else {
-      dataProductsCreated.map(
+      dataTrackingCreatedAt.map(
         (item) => item.createdAt.slice(0, 4) === i && item.trackings++,
       );
     }
   }
 
   for (const i of updatedAt) {
-    if (!dataProductsUpdated.find((item) => item.updatedAt.slice(0, 4) === i)) {
-      dataProductsUpdated.push({
-        id: dataProductsUpdated.length,
+    if (!dataTrackingUpdatedAt.find((item) => item.updatedAt.slice(0, 4) === i)) {
+      dataTrackingUpdatedAt.push({
+        id: dataTrackingUpdatedAt.length,
         updatedAt: i,
         trackings: 1,
       });
     } else {
-      dataProductsUpdated.map(
+      dataTrackingUpdatedAt.map(
         (item) => item.updatedAt.slice(0, 4) === i && item.trackings++,
       );
     }
   }
 
-  dataProductsCreated.sort((a, b) => a.createdAt - b.createdAt);
-  dataProductsUpdated.sort((a, b) => a.updatedAt - b.updatedAt);
+  dataTrackingCreatedAt.sort((a, b) => a.createdAt - b.createdAt);
+  dataTrackingUpdatedAt.sort((a, b) => a.updatedAt - b.updatedAt);
+
+  let dataTracking = [];
+
+  if (item.y === 'createdAt') {
+    dataTracking = dataTrackingCreatedAt;
+  } else if (item.y === 'updatedAt') {
+    dataTracking = dataTrackingUpdatedAt;
+  } else {
+    dataTracking = dataTrackingFilter;
+  }
 
   useLayoutEffect(() => {
     const root = am5.Root.new('areachart');
@@ -66,23 +95,23 @@ export const AreaChart = ({ data }) => {
     const xAxis = chart.xAxes.push(
       am5xy.CategoryAxis.new(root, {
         renderer: am5xy.AxisRendererX.new(root, { minGridDistance: 20 }),
-        categoryField: 'updatedAt',
+        categoryField: item.y,
       }),
     );
 
     xAxis.data.setAll([
       {
-        category: 'updatedAt',
+        category: item.y,
       },
     ]);
 
     const series = chart.series.push(
       am5xy.LineSeries.new(root, {
-        name: 'Trackings',
+        name: item.name,
         xAxis,
         yAxis,
-        valueYField: 'trackings',
-        categoryXField: 'updatedAt',
+        valueYField: item.x,
+        categoryXField: item.y,
         stroke: am5.color(0x76cadd),
         fill: am5.color(0x76cadd),
         tooltip: am5.Tooltip.new(root, {
@@ -112,9 +141,9 @@ export const AreaChart = ({ data }) => {
   }, []);
 
   useLayoutEffect(() => {
-    xAxisRef.current.data.setAll(dataProductsUpdated);
-    seriesRef.current.data.setAll(dataProductsUpdated);
-  }, [dataProductsUpdated]);
+    xAxisRef.current.data.setAll(dataTracking);
+    seriesRef.current.data.setAll(dataTracking);
+  }, [dataTracking]);
 
   return <div id="areachart" style={{ width: '100%', height: '85%' }}></div>;
 };

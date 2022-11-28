@@ -4,7 +4,6 @@ import { data } from '../../data/data';
 import './AddPage.scss';
 
 export const AddPage = ({ charts }) => {
-  
   return (
     <>
       <div className="info">
