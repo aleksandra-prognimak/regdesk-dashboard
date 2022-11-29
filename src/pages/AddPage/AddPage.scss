@@ -1,5 +1,123 @@
 @import '../../styles/utils/vars';
 
+.input__title {
+  border: 1px solid $MainNavyBlue;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 25px;
+  color: $MainNavyBlue;
+}
+
+.input__name {
+  border-radius: 8px;
+
+  &:focus {
+    outline: none;
+    border: 1px solid #8cbcd5;
+    padding: 10px 0 10px 18px;
+    font-size: 18px;
+    line-height: 25px;
+  }
+}
+
+.select__charts {
+  position: absolute;
+  background-color: $White;
+  top: 70px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  z-index: 1;
+}
+
+.select__chart {
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+
+  &:first-child {
+    margin-top: 8px;
+  }
+
+  &:last-child {
+    margin-bottom: 8px;
+  }
+
+  &:hover {
+    background-color: #e8f2f7;
+  }
+}
+
+.chart-name {
+  font-size: 14px;
+  line-height: 22px;
+  padding-left: 10px;
+  color: #212529;
+}
+
+.line-icon {
+  background-image: url(../../images/line-icon.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 18px;
+  width: 18px;
+}
+
+.area-icon {
+  background-image: url(../../images/area-icon.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 18px;
+  width: 18px;
+}
+
+.bar-icon {
+  background-image: url(../../images/bar-icon.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 18px;
+  width: 18px;
+}
+
+.pie-icon {
+  background-image: url(../../images/pie-icon.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 18px;
+  width: 18px;
+}
+
+.select__values {
+  position: absolute;
+  background-color: $White;
+  top: 70px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  z-index: 1;
+}
+
+.select__value {
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  line-height: 22px;
+  color: #212529;
+
+  &:first-child {
+    margin-top: 8px;
+  }
+
+  &:last-child {
+    margin-bottom: 8px;
+  }
+
+  &:hover {
+    background-color: #e8f2f7;
+  }
+}
+
 .buttons {
   background-color: $White;
   display: flex;
@@ -14,11 +132,16 @@
   align-items: flex-start;
   margin-right: 12px;
   cursor: pointer;
+  position: relative;
 
   &__name {
     font-size: 12px;
     line-height: 14px;
     margin-bottom: 6px;
+
+    &-input {
+      border-radius: 8px;
+    }
   }
 
   &__add {
@@ -52,7 +175,7 @@
 }
 
 .add__chart {
-  height: 400px;
+  height: 350px;
   width: 800px;
   background-color: $White;
   border-radius: 2px;

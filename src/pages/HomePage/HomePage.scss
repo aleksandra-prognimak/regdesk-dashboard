@@ -82,6 +82,18 @@
       padding: 0 35px;
       cursor: pointer;
     }
+
+    &-disabled {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 46px;
+      border-radius: 8px;
+      background-color: #f8c88c;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 25px;
+    }
   }
 }
 

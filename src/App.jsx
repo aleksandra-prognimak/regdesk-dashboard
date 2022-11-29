@@ -1,24 +1,22 @@
-//import { Outlet } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { AddPage } from './pages/AddPage';
 import { PageNotFound } from './pages/PageNotFound';
 import './App.scss';
 import { Header } from './components/Header';
-//import { StackedBarChart } from './components/StackedBarChart';
 import { PieChart } from './components/PieChart';
 import { BarChart } from './components/BarChart';
 import { AreaChart } from './components/AreaChart';
 import { LineChart } from './components/LineChart';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 export const App = () => {
   const [charts, setCharts] = useState([
-    //{ id: 5, name: 'Checklists', Component: StackedBarChart },
-    { id: 4, name: 'Products', Component: PieChart, x: 'products', y: 'country' },
-    { id: 2, name: 'Products', Component: BarChart, x: 'products', y: 'country' },
-    { id: 1, name: 'Trackings', Component: AreaChart, x: 'trackings', y: 'createdAt' },
-    { id: 3, name: 'Applications', Component: LineChart, x: 'applications', y: 'country' },
+    { id: uuidv4(), name: 'Pie Chart', Component: PieChart, x: 'products', y: 'country' },
+    { id: uuidv4(), name: 'Bar Chart', Component: BarChart, x: 'products', y: 'country' },
+    { id: uuidv4(), name: 'Area Chart', Component: AreaChart, x: 'trackings', y: 'createdAt' },
+    { id: uuidv4(), name: 'Line Chart', Component: LineChart, x: 'applications', y: 'country' },
   ]);
   const [updatedChart, setUpdatedChart] = useState([]);
   const [selectedId, setSelectedId] = useState(0);
@@ -47,7 +45,7 @@ export const App = () => {
             }
           />
           <Route path="home" element={<Navigate to="/" replace />} />
-          <Route path="add" element={<AddPage charts={updatedChart} setCharts={setCharts} />} />
+          <Route path="add" element={<AddPage updatedChart={updatedChart} charts={charts} setCharts={setCharts} />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>

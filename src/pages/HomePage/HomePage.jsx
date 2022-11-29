@@ -4,7 +4,6 @@ import { data } from '../../data/data';
 import { Link } from 'react-router-dom';
 import './HomePage.scss';
 import { Chart } from '../../components/Chart';
-//import Dropdown from 'react-bootstrap/Dropdown';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -45,8 +44,6 @@ export const HomePage = ({ charts, updateChart, selectedId, setSelectedId, delet
     setLayouts(layouts);
   };
 
-  const reset = () => setLayouts({});
-
   const [dropdownState, setDropdownState] = useState(false);
 
   const handleDropdownClick = (id) => {
@@ -62,7 +59,6 @@ export const HomePage = ({ charts, updateChart, selectedId, setSelectedId, delet
           <div className="info__link-button">Add Widget</div>
         </Link>
       </div>
-      <button onClick={reset}>reset</button>
       <ResponsiveReactGridLayout
         className="layout"
         rowHeight={30}

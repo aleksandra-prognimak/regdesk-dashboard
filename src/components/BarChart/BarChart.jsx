@@ -2,6 +2,7 @@ import React, { useLayoutEffect, useRef } from 'react';
 import * as am5 from '@amcharts/amcharts5';
 import * as am5xy from '@amcharts/amcharts5/xy';
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
+import { v4 as uuidv4 } from 'uuid';
 
 export const BarChart = ({ data, item }) => {
   const seriesRef = useRef(null);
@@ -83,8 +84,10 @@ export const BarChart = ({ data, item }) => {
     newDataProducts = dataFilterProducts;
   }
 
+  const id = uuidv4();
+
   useLayoutEffect(() => {
-    const root = am5.Root.new('barchart');
+    const root = am5.Root.new(id);
 
     root._logo.dispose();
 
@@ -118,7 +121,7 @@ export const BarChart = ({ data, item }) => {
 
     const series = chart.series.push(
       am5xy.ColumnSeries.new(root, {
-        name: item.name,
+        name: item.x,
         xAxis,
         yAxis,
         valueYField: item.x,
@@ -150,5 +153,5 @@ export const BarChart = ({ data, item }) => {
     seriesRef.current.data.setAll(newDataProducts);
   }, [newDataProducts]);
 
-  return <div id="barchart" style={{ width: '100%', height: '85%' }}></div>;
+  return <div id={id} style={{ width: '100%', height: '85%' }}></div>;
 };

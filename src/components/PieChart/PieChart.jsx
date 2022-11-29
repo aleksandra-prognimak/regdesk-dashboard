@@ -2,6 +2,7 @@ import React, { useLayoutEffect } from 'react';
 import * as am5 from '@amcharts/amcharts5';
 import * as am5percent from '@amcharts/amcharts5/percent';
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
+import { v4 as uuidv4 } from 'uuid';
 
 export const PieChart = ({ data, item }) => {
   const dataFilter = data.products.filter(
@@ -80,8 +81,10 @@ export const PieChart = ({ data, item }) => {
     newDataProducts = dataFilterProducts;
   }
 
+  const id = uuidv4();
+
   useLayoutEffect(() => {
-    const root = am5.Root.new('piechart');
+    const root = am5.Root.new(id);
 
     root._logo.dispose();
 
@@ -140,5 +143,5 @@ export const PieChart = ({ data, item }) => {
     };
   }, []);
 
-  return <div id={'piechart'} style={{ width: '100%', height: '85%' }}></div>;
+  return <div id={id} style={{ width: '100%', height: '80%' }}></div>;
 };
