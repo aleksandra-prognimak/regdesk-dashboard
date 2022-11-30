@@ -90,16 +90,40 @@ export const getFlag = (country) => {
       return 'https://www.amcharts.com/wp-content/uploads/flags/greenland.svg';
     case 'SRB':
       return 'https://www.amcharts.com/wp-content/uploads/flags/serbia.svg';
-    case "AUT":
+    case 'AUT':
       return 'https://www.amcharts.com/wp-content/uploads/flags/austria.svg';
-    case "HUN":
+    case 'HUN':
       return 'https://www.amcharts.com/wp-content/uploads/flags/hungary.svg';
-    case "NOR":
+    case 'NOR':
       return 'https://www.amcharts.com/wp-content/uploads/flags/norway.svg';
-    case "ETH":
+    case 'ETH':
       return 'https://www.amcharts.com/wp-content/uploads/flags/ethiopia.svg';
-    case "KEN":
+    case 'KEN':
       return 'https://www.amcharts.com/wp-content/uploads/flags/kenya.svg';
+    case 'ARE':
+      return 'https://www.amcharts.com/wp-content/uploads/flags/united-arab-emirates.svg';
+    case 'IRN':
+      return 'https://www.amcharts.com/wp-content/uploads/flags/iran.svg';
+    case 'FIN':
+      return 'https://www.amcharts.com/wp-content/uploads/flags/finland.svg';
+    case 'COL':
+      return 'https://www.amcharts.com/wp-content/uploads/flags/colombia.svg';
+    case 'ZMB':
+      return 'https://www.amcharts.com/wp-content/uploads/flags/zambia.svg';
+    case 'VAT':
+      return 'https://www.amcharts.com/wp-content/uploads/flags/vatican-city.svg';
+    case 'THA':
+      return 'https://www.amcharts.com/wp-content/uploads/flags/thailand.svg';
+    case 'EST':
+      return 'https://www.amcharts.com/wp-content/uploads/flags/estonia.svg';
+    case 'NGA':
+      return 'https://www.amcharts.com/wp-content/uploads/flags/nigeria.svg';
+    case 'MNG':
+      return 'https://www.amcharts.com/wp-content/uploads/flags/mongolia.svg';
+    case 'BWA':
+      return 'https://www.amcharts.com/wp-content/uploads/flags/botswana.svg';
+    case 'CYM':
+      return 'https://www.amcharts.com/wp-content/uploads/flags/cayman-islands.svg';
     default:
       break;
   }
