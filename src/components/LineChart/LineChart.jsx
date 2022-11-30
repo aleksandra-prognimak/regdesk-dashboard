@@ -3,78 +3,13 @@ import * as am5 from '@amcharts/amcharts5';
 import * as am5xy from '@amcharts/amcharts5/xy';
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
 import { v4 as uuidv4 } from 'uuid';
-import { data } from '../../data/data';
-import { getFlag } from '../../utils/getFlag';
+import { getData } from '../../utils/getData';
 
 export const LineChart = ({ item }) => {
   const seriesRef = useRef(null);
   const xAxisRef = useRef(null);
 
-  const countries = [];
-  const dataApplicationsCountries = [];
-
-  data.applications.map((item) => countries.push(item.country));
-
-  for (const i of countries) {
-    if (!dataApplicationsCountries.find((item) => item.country === i)) {
-      dataApplicationsCountries.push({
-        id: dataApplicationsCountries.length,
-        country: i,
-        applications: 1,
-        icon: getFlag(i),
-      });
-    } else {
-      dataApplicationsCountries.map((item) => item.country === i && item.applications++);
-    }
-  }
-
-  const dataApplicationsFilter = dataApplicationsCountries.filter(item => item.applications > 3);
-
-  const createdAt = data.applications.map((item) => item.createdAt.slice(0, 4));
-  const updatedAt = data.applications.map((item) => item.updatedAt.slice(0, 4));
-  const dataApplicationsCreatedAt = [];
-  const dataApplicationsUpdatedAt = [];
-
-  for (const i of createdAt) {
-    if (!dataApplicationsCreatedAt.find((item) => item.createdAt.slice(0, 4) === i)) {
-      dataApplicationsCreatedAt.push({
-        id: dataApplicationsCreatedAt.length,
-        createdAt: i,
-        applications: 1,
-      });
-    } else {
-      dataApplicationsCreatedAt.map(
-        (item) => item.createdAt.slice(0, 4) === i && item.applications++,
-      );
-    }
-  }
-
-  for (const i of updatedAt) {
-    if (!dataApplicationsUpdatedAt.find((item) => item.updatedAt.slice(0, 4) === i)) {
-      dataApplicationsUpdatedAt.push({
-        id: dataApplicationsUpdatedAt.length,
-        updatedAt: i,
-        applications: 1,
-      });
-    } else {
-      dataApplicationsUpdatedAt.map(
-        (item) => item.updatedAt.slice(0, 4) === i && item.applications++,
-      );
-    }
-  }
-
-  dataApplicationsCreatedAt.sort((a, b) => a.createdAt - b.createdAt);
-  dataApplicationsUpdatedAt.sort((a, b) => a.updatedAt - b.updatedAt);
-
-  let dataApplications = [];
-
-  if (item.y === 'createdAt') {
-    dataApplications = dataApplicationsCreatedAt;
-  } else if (item.y === 'updatedAt') {
-    dataApplications = dataApplicationsUpdatedAt;
-  } else {
-    dataApplications = dataApplicationsFilter;
-  }
+  const data = getData(item);
 
   const id = uuidv4();
 
@@ -161,9 +96,9 @@ export const LineChart = ({ item }) => {
   }, []);
 
   useLayoutEffect(() => {
-    xAxisRef.current.data.setAll(dataApplications);
-    seriesRef.current.data.setAll(dataApplications);
-  }, [dataApplications]);
+    xAxisRef.current.data.setAll(data);
+    seriesRef.current.data.setAll(data);
+  }, [data]);
 
   return <div id={id} style={{ width: '100%', height: '85%' }}></div>;
 };

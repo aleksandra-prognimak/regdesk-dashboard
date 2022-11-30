@@ -3,77 +3,13 @@ import * as am5 from '@amcharts/amcharts5';
 import * as am5xy from '@amcharts/amcharts5/xy';
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
 import { v4 as uuidv4 } from 'uuid';
-import { getFlag } from '../../utils/getFlag';
+import { getData } from '../../utils/getData';
 
-export const AreaChart = ({ data, item }) => {
+export const AreaChart = ({ item }) => {
   const seriesRef = useRef(null);
   const xAxisRef = useRef(null);
 
-  const countries = [];
-  const dataTrackingCountries = [];
-
-  data.trackings.map((item) => countries.push(item.countryId));
-
-  for (const i of countries) {
-    if (!dataTrackingCountries.find((item) => item.country === i)) {
-      dataTrackingCountries.push({
-        id: dataTrackingCountries.length,
-        country: i,
-        trackings: 1,
-        icon: getFlag(i),
-      });
-    } else {
-      dataTrackingCountries.map((item) => item.country === i && item.trackings++);
-    }
-  }
-
-  const dataTrackingFilter = dataTrackingCountries.filter(item => item.trackings > 3);
-
-  const createdAt = data.trackings.map((item) => item.createdAt.slice(0, 4));
-  const updatedAt = data.trackings.map((item) => item.updatedAt.slice(0, 4));
-  const dataTrackingCreatedAt = [];
-  const dataTrackingUpdatedAt = [];
-
-  for (const i of createdAt) {
-    if (!dataTrackingCreatedAt.find((item) => item.createdAt.slice(0, 4) === i)) {
-      dataTrackingCreatedAt.push({
-        id: dataTrackingCreatedAt.length,
-        createdAt: i,
-        trackings: 1,
-      });
-    } else {
-      dataTrackingCreatedAt.map(
-        (item) => item.createdAt.slice(0, 4) === i && item.trackings++,
-      );
-    }
-  }
-
-  for (const i of updatedAt) {
-    if (!dataTrackingUpdatedAt.find((item) => item.updatedAt.slice(0, 4) === i)) {
-      dataTrackingUpdatedAt.push({
-        id: dataTrackingUpdatedAt.length,
-        updatedAt: i,
-        trackings: 1,
-      });
-    } else {
-      dataTrackingUpdatedAt.map(
-        (item) => item.updatedAt.slice(0, 4) === i && item.trackings++,
-      );
-    }
-  }
-
-  dataTrackingCreatedAt.sort((a, b) => a.createdAt - b.createdAt);
-  dataTrackingUpdatedAt.sort((a, b) => a.updatedAt - b.updatedAt);
-
-  let dataTracking = [];
-
-  if (item.y === 'createdAt') {
-    dataTracking = dataTrackingCreatedAt;
-  } else if (item.y === 'updatedAt') {
-    dataTracking = dataTrackingUpdatedAt;
-  } else {
-    dataTracking = dataTrackingFilter;
-  }
+  const data = getData(item);
 
   const id = uuidv4();
 
@@ -166,9 +102,9 @@ export const AreaChart = ({ data, item }) => {
   }, []);
 
   useLayoutEffect(() => {
-    xAxisRef.current.data.setAll(dataTracking);
-    seriesRef.current.data.setAll(dataTracking);
-  }, [dataTracking]);
+    xAxisRef.current.data.setAll(data);
+    seriesRef.current.data.setAll(data);
+  }, [data]);
 
   return <div id={id} style={{ width: '100%', height: '85%' }}></div>;
 };

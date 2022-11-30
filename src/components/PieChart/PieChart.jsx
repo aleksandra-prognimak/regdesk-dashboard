@@ -3,83 +3,10 @@ import * as am5 from '@amcharts/amcharts5';
 import * as am5percent from '@amcharts/amcharts5/percent';
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
 import { v4 as uuidv4 } from 'uuid';
+import { getData } from '../../utils/getData';
 
-export const PieChart = ({ data, item }) => {
-  const dataFilter = data.products.filter(
-    (item) =>
-      item.sku
-      && item.sku.length > 0
-      && item.sku[0].countries
-      && item.sku[0].countries.length > 0,
-  );
-
-  const countries = [];
-  const dataProducts = [];
-
-  for (const i of dataFilter) {
-    for (const j of i.sku[0].countries) {
-      countries.push(j);
-    }
-  }
-
-  for (const i of countries) {
-    if (!dataProducts.find((item) => item.country === i)) {
-      dataProducts.push({
-        id: dataProducts.length,
-        country: i,
-        products: 1,
-      });
-    } else {
-      dataProducts.map((item) => item.country === i && item.products++);
-    }
-  }
-
-  const dataFilterProducts = dataProducts.filter((item) => item.products > 6);
-
-  const createdAt = data.products.map((item) => item.createdAt.slice(0, 4));
-  const updatedAt = data.products.map((item) => item.updatedAt.slice(0, 4));
-  const dataProductsCreatedAt = [];
-  const dataProductsUpdatedAt = [];
-
-  for (const i of createdAt) {
-    if (!dataProductsCreatedAt.find((item) => item.createdAt.slice(0, 4) === i)) {
-      dataProductsCreatedAt.push({
-        id: dataProductsCreatedAt.length,
-        createdAt: i,
-        products: 1,
-      });
-    } else {
-      dataProductsCreatedAt.map(
-        (item) => item.createdAt.slice(0, 4) === i && item.products++,
-      );
-    }
-  }
-
-  for (const i of updatedAt) {
-    if (!dataProductsUpdatedAt.find((item) => item.updatedAt.slice(0, 4) === i)) {
-      dataProductsUpdatedAt.push({
-        id: dataProductsUpdatedAt.length,
-        updatedAt: i,
-        products: 1,
-      });
-    } else {
-      dataProductsUpdatedAt.map(
-        (item) => item.updatedAt.slice(0, 4) === i && item.products++,
-      );
-    }
-  }
-
-  dataProductsCreatedAt.sort((a, b) => a.createdAt - b.createdAt);
-  dataProductsUpdatedAt.sort((a, b) => a.updatedAt - b.updatedAt);
-  let newDataProducts = [];
-
-  if (item.y === 'createdAt') {
-    newDataProducts = dataProductsCreatedAt;
-  } else if (item.y === 'updatedAt') {
-    newDataProducts = dataProductsUpdatedAt;
-  } else {
-    newDataProducts = dataFilterProducts;
-  }
+export const PieChart = ({ item }) => {
+  const data = getData(item);
 
   const id = uuidv4();
 
@@ -123,7 +50,7 @@ export const PieChart = ({ data, item }) => {
         am5.color(0xe71e20),
       ]);
 
-    series.data.setAll(newDataProducts);
+    series.data.setAll(data);
     series.labels.template.set('forceHidden', true);
     series.ticks.template.set('forceHidden', true);
 
