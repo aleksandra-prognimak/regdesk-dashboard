@@ -80,7 +80,6 @@
     &-button {
       color: $White;
       padding: 0 35px;
-      cursor: pointer;
     }
 
     &-disabled {
@@ -93,6 +92,7 @@
       font-weight: 600;
       font-size: 18px;
       line-height: 25px;
+      cursor: not-allowed;
     }
   }
 }

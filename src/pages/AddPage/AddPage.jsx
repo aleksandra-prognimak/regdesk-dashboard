@@ -224,6 +224,13 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
         )}
       </div>
 
+      {!selectedChart && (
+        <div className='add__getStart'>
+          <div className="add__getStart-title">Build Your Widgets</div>
+          <div className="add__getStart-subtitle">Choose a chart to get started</div>
+        </div>
+      )}
+
       {updatedChart.length !== 0
         && updatedChart.map((item) => (
           <div key={item.id} className="add__chart">

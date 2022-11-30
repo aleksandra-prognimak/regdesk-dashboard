@@ -13,10 +13,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 export const App = () => {
   const [charts, setCharts] = useState([
-    { id: uuidv4(), name: 'Pie Chart', Component: PieChart, x: 'products', y: 'country' },
-    { id: uuidv4(), name: 'Bar Chart', Component: BarChart, x: 'products', y: 'country' },
-    { id: uuidv4(), name: 'Area Chart', Component: AreaChart, x: 'trackings', y: 'createdAt' },
-    { id: uuidv4(), name: 'Line Chart', Component: LineChart, x: 'applications', y: 'country' },
+    { id: uuidv4(), name: 'Products', Component: PieChart, x: 'products', y: 'createdAt' },
+    { id: uuidv4(), name: 'Products', Component: BarChart, x: 'products', y: 'country' },
+    { id: uuidv4(), name: 'Trackings', Component: AreaChart, x: 'trackings', y: 'createdAt' },
+    { id: uuidv4(), name: 'Applications', Component: LineChart, x: 'applications', y: 'country' },
   ]);
   const [updatedChart, setUpdatedChart] = useState([]);
   const [selectedId, setSelectedId] = useState(0);

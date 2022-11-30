@@ -3,6 +3,7 @@ import * as am5 from '@amcharts/amcharts5';
 import * as am5xy from '@amcharts/amcharts5/xy';
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
 import { v4 as uuidv4 } from 'uuid';
+import { getFlag } from '../../utils/getFlag';
 
 export const BarChart = ({ data, item }) => {
   const seriesRef = useRef(null);
@@ -31,12 +32,13 @@ export const BarChart = ({ data, item }) => {
         id: dataProducts.length,
         country: i,
         products: 1,
+        icon: getFlag(i),
       });
     } else {
       dataProducts.map((item) => item.country === i && item.products++);
     }
   }
-
+  
   const dataFilterProducts = dataProducts.filter((item) => item.products > 4);
 
   const createdAt = data.products.map((item) => item.createdAt.slice(0, 4));
@@ -107,11 +109,30 @@ export const BarChart = ({ data, item }) => {
     );
 
     const xAxis = chart.xAxes.push(
-      am5xy.CategoryAxis.new(root, {
+      am5xy.CategoryAxis.new(root, item.y === 'country' ? {
+        renderer: am5xy.AxisRendererX.new(root, { minGridDistance: 20 }),
+        categoryField: item.y,
+        bullet: function (root, axis, dataItem) {
+          return am5xy.AxisBullet.new(root, {
+            location: 0.5,
+            sprite: am5.Picture.new(root, {
+              width: 20,
+              height: 20,
+              centerY: am5.p50,
+              centerX: am5.p50,
+              src: dataItem.dataContext.icon
+            })
+          });
+        }
+      } : {
         renderer: am5xy.AxisRendererX.new(root, { minGridDistance: 20 }),
         categoryField: item.y,
       }),
     );
+
+    xAxis.get("renderer").labels.template.setAll({
+      paddingTop: 14
+    });
 
     xAxis.data.setAll([
       {
@@ -128,7 +149,7 @@ export const BarChart = ({ data, item }) => {
         categoryXField: item.y,
         fill: am5.color(0xf8c33a),
         tooltip: am5.Tooltip.new(root, {
-          labelText: '{name}[/]\n{valueX} {valueY}',
+          labelText: '{categoryX}: {valueY}',
         }),
       }),
     );
