@@ -38,11 +38,11 @@ export const getChecklists = (item) => {
       dataChecklistsCreatedAt.push({
         id: dataChecklistsCreatedAt.length,
         createdAt: i,
-        trackings: 1,
+        checklists: 1,
       });
     } else {
       dataChecklistsCreatedAt.map(
-        (item) => item.createdAt.slice(0, 4) === i && item.trackings++,
+        (item) => item.createdAt.slice(0, 4) === i && item.checklists++,
       );
     }
   }
@@ -54,11 +54,11 @@ export const getChecklists = (item) => {
       dataChecklistsUpdatedAt.push({
         id: dataChecklistsUpdatedAt.length,
         updatedAt: i,
-        trackings: 1,
+        checklists: 1,
       });
     } else {
       dataChecklistsUpdatedAt.map(
-        (item) => item.updatedAt.slice(0, 4) === i && item.trackings++,
+        (item) => item.updatedAt.slice(0, 4) === i && item.checklists++,
       );
     }
   }
@@ -66,15 +66,15 @@ export const getChecklists = (item) => {
   dataChecklistsCreatedAt.sort((a, b) => a.createdAt - b.createdAt);
   dataChecklistsUpdatedAt.sort((a, b) => a.updatedAt - b.updatedAt);
 
-  let dataTracking = [];
+  let dataChecklists = [];
 
   if (item.y === 'createdAt') {
-    dataTracking = dataChecklistsCreatedAt;
+    dataChecklists = dataChecklistsCreatedAt;
   } else if (item.y === 'updatedAt') {
-    dataTracking = dataChecklistsUpdatedAt;
+    dataChecklists = dataChecklistsUpdatedAt;
   } else {
-    dataTracking = dataChecklistsFilter;
+    dataChecklists = dataChecklistsFilter;
   }
 
-  return dataTracking;
+  return dataChecklists;
 };

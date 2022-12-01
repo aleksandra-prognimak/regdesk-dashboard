@@ -19,10 +19,8 @@ export const PieChart = ({ item }) => {
 
     const chart = root.container.children.push(
       am5percent.PieChart.new(root, {
-        layout: root.verticalLayout,
-        radius: am5.percent(160),
-        x: am5.percent(10),
-        y: am5.percent(25),
+        radius: 90,
+        x: 40,
       }),
     );
 
@@ -56,9 +54,16 @@ export const PieChart = ({ item }) => {
 
     const legend = chart.children.push(
       am5.Legend.new(root, {
-        centerY: am5.percent(30),
-        y: am5.percent(10),
+        centerY: am5.percent(50),
+        y: am5.percent(50),
+        x: -10,
         layout: root.verticalLayout,
+        height: am5.percent(70),
+        width: 100,
+        verticalScrollbar: am5.Scrollbar.new(root, {
+          orientation: 'vertical',
+          width: 1,
+        }),
       }),
     );
 

@@ -12,9 +12,12 @@ import './AddPage.scss';
 export const AddPage = ({ updatedChart, charts, setCharts }) => {
   const [selectedChart, setSelectedChart] = useState(null);
   const [isOpenChart, setIsOpenChart] = useState(false);
-  const [isOpenValue, setIsOpenValue] = useState(false);
-  const values = ['country', 'createdAt', 'updatedAt'];
-  const [value, setValue] = useState('');
+  const [isOpenValueY, setIsOpenValueY] = useState(false);
+  const [isOpenValueX, setIsOpenValueX] = useState(false);
+  const valuesY = ['country', 'createdAt', 'updatedAt'];
+  const valuesX = ['products', 'checklists', 'trackings', 'applications'];
+  const [valueY, setValueY] = useState('');
+  const [valueX, setValueX] = useState('');
   const [chartName, setChartName] = useState('');
   const newNameField = useRef(null);
   const [click, setClick] = useState(false);
@@ -23,6 +26,7 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
   const add = () => {
     selectedChart
       && selectedChart.y.length !== 0
+      && selectedChart.x.length !== 0
       && setCharts([...charts, selectedChart]);
   };
 
@@ -45,6 +49,7 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
         <div className="info__name">Set your Dashboard</div>
         {selectedChart
         && selectedChart.y.length !== 0
+        && selectedChart.x.length !== 0
         && selectedChart.name.trim().length !== 0 ? (
             <Link to="/" className="info__link" onClick={add}>
               <div className="info__link-button">Add Widget</div>
@@ -80,7 +85,7 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
                       id: uuidv4(),
                       name: newName,
                       Component: LineChart,
-                      x: 'applications',
+                      x: ' ',
                       y: '',
                     });
                     setIsOpenChart(!isOpenChart);
@@ -99,7 +104,7 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
                       id: uuidv4(),
                       name: newName,
                       Component: AreaChart,
-                      x: 'trackings',
+                      x: ' ',
                       y: '',
                     });
                     setIsOpenChart(!isOpenChart);
@@ -118,7 +123,7 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
                       id: uuidv4(),
                       name: newName,
                       Component: BarChart,
-                      x: 'products',
+                      x: ' ',
                       y: '',
                     });
                     setIsOpenChart(!isOpenChart);
@@ -137,7 +142,7 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
                       id: uuidv4(),
                       name: newName,
                       Component: PieChart,
-                      x: 'products',
+                      x: ' ',
                       y: '',
                     });
                     setIsOpenChart(!isOpenChart);
@@ -152,36 +157,72 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
         </div>
 
         {selectedChart && (
-          <div className="button">
-            <div className="button__name">VALUE</div>
-            <div
-              className="button__add"
-              onClick={() => setIsOpenValue(!isOpenValue)}
-            >
-              <div className="button__add-name">
-                {value.length === 0 ? 'Value' : value}
+          <>
+            <div className="button">
+              <div className="button__name">VALUE</div>
+              <div
+                className="button__add"
+                onClick={() => setIsOpenValueX(!isOpenValueX)}
+              >
+                <div className="button__add-name">
+                  {valueX.length === 0 ? 'Value' : valueX}
+                </div>
+                <div className="button__add-icon"></div>
               </div>
-              <div className="button__add-icon"></div>
-            </div>
 
-            {isOpenValue && (
-              <ul className="select__values">
-                {values.map((v) => (
-                  <li
-                    key={v}
-                    onClick={() => {
-                      setValue(v);
-                      setIsOpenValue(!isOpenValue);
-                      setSelectedChart(Object.assign(selectedChart, { y: v }));
-                    }}
-                    className="select__value"
-                  >
-                    {v}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
+              {isOpenValueX && (
+                <ul className="select__values">
+                  {valuesX.map((v) => (
+                    <li
+                      key={v}
+                      onClick={() => {
+                        setValueX(v);
+                        setIsOpenValueX(!isOpenValueX);
+                        setSelectedChart(
+                          Object.assign(selectedChart, { x: v }),
+                        );
+                      }}
+                      className="select__value"
+                    >
+                      {v}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <div className="button">
+              <div className="button__name">VALUE</div>
+              <div
+                className="button__add"
+                onClick={() => setIsOpenValueY(!isOpenValueY)}
+              >
+                <div className="button__add-name">
+                  {valueY.length === 0 ? 'Value' : valueY}
+                </div>
+                <div className="button__add-icon"></div>
+              </div>
+
+              {isOpenValueY && (
+                <ul className="select__values">
+                  {valuesY.map((v) => (
+                    <li
+                      key={v}
+                      onClick={() => {
+                        setValueY(v);
+                        setIsOpenValueY(!isOpenValueY);
+                        setSelectedChart(
+                          Object.assign(selectedChart, { y: v }),
+                        );
+                      }}
+                      className="select__value"
+                    >
+                      {v}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </>
         )}
 
         {selectedChart && (
@@ -225,9 +266,11 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
       </div>
 
       {!selectedChart && (
-        <div className='add__getStart'>
+        <div className="add__getStart">
           <div className="add__getStart-title">Build Your Widgets</div>
-          <div className="add__getStart-subtitle">Choose a chart to get started</div>
+          <div className="add__getStart-subtitle">
+            Choose a chart to get started
+          </div>
         </div>
       )}
 
@@ -252,14 +295,65 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
               <div className="chart__button"></div>
             </div>
           </div>
-          {selectedChart.y === '' && <Chart data={data} item={selectedChart} />}
-          {selectedChart.y === 'country' && (
+          {selectedChart.y === '' && selectedChart.x === '' && <Chart data={data} item={selectedChart} />}
+          {selectedChart.y === '' && selectedChart.x === '' && (
             <Chart data={data} item={selectedChart} />
           )}
-          {selectedChart.y === 'createdAt' && (
+          {selectedChart.y === '' && selectedChart.x === 'products' && (
             <Chart data={data} item={selectedChart} />
           )}
-          {selectedChart.y === 'updatedAt' && (
+          {selectedChart.y === '' && selectedChart.x === 'checklists' && (
+            <Chart data={data} item={selectedChart} />
+          )}
+          {selectedChart.y === '' && selectedChart.x === 'trackings' && (
+            <Chart data={data} item={selectedChart} />
+          )}
+          {selectedChart.y === '' && selectedChart.x === 'applications' && (
+            <Chart data={data} item={selectedChart} />
+          )}
+          {selectedChart.y === 'country' && selectedChart.x === '' && (
+            <Chart data={data} item={selectedChart} />
+          )}
+          {selectedChart.y === 'country' && selectedChart.x === 'products' && (
+            <Chart data={data} item={selectedChart} />
+          )}
+          {selectedChart.y === 'country' && selectedChart.x === 'checklists' && (
+            <Chart data={data} item={selectedChart} />
+          )}
+          {selectedChart.y === 'country' && selectedChart.x === 'trackings' && (
+            <Chart data={data} item={selectedChart} />
+          )}
+          {selectedChart.y === 'country' && selectedChart.x === 'applications' && (
+            <Chart data={data} item={selectedChart} />
+          )}
+          {selectedChart.y === 'createdAt' && selectedChart.x === '' && (
+            <Chart data={data} item={selectedChart} />
+          )}
+          {selectedChart.y === 'createdAt' && selectedChart.x === 'products' && (
+            <Chart data={data} item={selectedChart} />
+          )}
+          {selectedChart.y === 'createdAt' && selectedChart.x === 'checklists' && (
+            <Chart data={data} item={selectedChart} />
+          )}
+          {selectedChart.y === 'createdAt' && selectedChart.x === 'trackings' && (
+            <Chart data={data} item={selectedChart} />
+          )}
+          {selectedChart.y === 'createdAt' && selectedChart.x === 'applications' && (
+            <Chart data={data} item={selectedChart} />
+          )}
+          {selectedChart.y === 'updatedAt' && selectedChart.x === '' && (
+            <Chart data={data} item={selectedChart} />
+          )}
+          {selectedChart.y === 'updatedAt' && selectedChart.x === 'products' && (
+            <Chart data={data} item={selectedChart} />
+          )}
+          {selectedChart.y === 'updatedAt' && selectedChart.x === 'checklists' && (
+            <Chart data={data} item={selectedChart} />
+          )}
+          {selectedChart.y === 'updatedAt' && selectedChart.x === 'trackings' && (
+            <Chart data={data} item={selectedChart} />
+          )}
+          {selectedChart.y === 'updatedAt' && selectedChart.x === 'applications' && (
             <Chart data={data} item={selectedChart} />
           )}
         </div>
