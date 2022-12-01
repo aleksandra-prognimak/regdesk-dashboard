@@ -53,19 +53,19 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
 
   useEffect(() => {
     const handler1 = (event) => {
-      if (!menuCharts.current.contains(event.target)) {
+      if (menuCharts.current && !menuCharts.current.contains(event.target)) {
         setIsOpenChart(false);
       }
     };
 
     const handler2 = (event) => {
-      if (!menuValuesX.current.contains(event.target)) {
+      if (menuValuesX.current && !menuValuesX.current.contains(event.target)) {
         setIsOpenValueX(false);
       }
     };
 
     const handler3 = (event) => {
-      if (!menuValuesY.current.contains(event.target)) {
+      if (menuValuesY.current && !menuValuesY.current.contains(event.target)) {
         setIsOpenValueY(false);
       }
     };
@@ -100,7 +100,7 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
       </div>
 
       <div className="buttons">
-        <div className="button">
+        <div className="button" ref={menuCharts}>
           <div className="button__name">CHART</div>
           <div
             className="button__add"
@@ -113,7 +113,7 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
           </div>
 
           {isOpenChart && (
-            <ul className="select__charts" ref={menuCharts}>
+            <ul className="select__charts">
               <li className="select__chart">
                 <div className="line-icon"></div>
                 <div
@@ -196,7 +196,7 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
 
         {selectedChart && (
           <>
-            <div className="button">
+            <div className="button" ref={menuValuesX}>
               <div className="button__name">VALUE</div>
               <div
                 className="button__add"
@@ -209,7 +209,7 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
               </div>
 
               {isOpenValueX && (
-                <ul className="select__values" ref={menuValuesX}>
+                <ul className="select__values" >
                   {valuesX.map((v) => (
                     <li
                       key={v}
@@ -228,7 +228,7 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
                 </ul>
               )}
             </div>
-            <div className="button">
+            <div className="button" ref={menuValuesY}>
               <div className="button__name">GROUP BY</div>
               <div
                 className="button__add"
@@ -241,7 +241,7 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
               </div>
 
               {isOpenValueY && (
-                <ul className="select__values" ref={menuValuesY}>
+                <ul className="select__values">
                   {valuesY.map((v) => (
                     <li
                       key={v}
