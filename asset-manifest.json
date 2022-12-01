@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/regdesk-dashboard/static/css/main.044231f9.css",
-    "main.js": "/regdesk-dashboard/static/js/main.bbceb273.js",
+    "main.css": "/regdesk-dashboard/static/css/main.e12e6386.css",
+    "main.js": "/regdesk-dashboard/static/js/main.3f7a2c10.js",
     "static/media/logo.svg": "/regdesk-dashboard/static/media/logo.900de5642e4ab9566e20.svg",
     "static/media/bell-icon.svg": "/regdesk-dashboard/static/media/bell-icon.fefd5c84d69962d08183.svg",
     "static/media/add-button-icon.svg": "/regdesk-dashboard/static/media/add-button-icon.925332daf9d9b2737576.svg",
@@ -14,11 +14,11 @@
     "static/media/area-icon.svg": "/regdesk-dashboard/static/media/area-icon.6568877966c8e34601ff.svg",
     "static/media/line-icon.svg": "/regdesk-dashboard/static/media/line-icon.c60f4c4f2aa60c245cf6.svg",
     "static/media/bar-icon.svg": "/regdesk-dashboard/static/media/bar-icon.4f9052264d471687680c.svg",
-    "main.044231f9.css.map": "/regdesk-dashboard/static/css/main.044231f9.css.map",
-    "main.bbceb273.js.map": "/regdesk-dashboard/static/js/main.bbceb273.js.map"
+    "main.e12e6386.css.map": "/regdesk-dashboard/static/css/main.e12e6386.css.map",
+    "main.3f7a2c10.js.map": "/regdesk-dashboard/static/js/main.3f7a2c10.js.map"
   },
   "entrypoints": [
-    "static/css/main.044231f9.css",
-    "static/js/main.bbceb273.js"
+    "static/css/main.e12e6386.css",
+    "static/js/main.3f7a2c10.js"
   ]
 }
