@@ -20,6 +20,9 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
   const [valueX, setValueX] = useState('');
   const [chartName, setChartName] = useState('');
   const newNameField = useRef(null);
+  const menuCharts = useRef();
+  const menuValuesY = useRef();
+  const menuValuesX = useRef();
   const [click, setClick] = useState(false);
   const [newName, setNewName] = useState('');
 
@@ -48,13 +51,43 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
     setSelectedChart(Object.assign(selectedChart, { name: newName }));
   };
 
+  useEffect(() => {
+    const handler1 = (event) => {
+      if (!menuCharts.current.contains(event.target)) {
+        setIsOpenChart(false);
+      }
+    };
+
+    const handler2 = (event) => {
+      if (!menuValuesX.current.contains(event.target)) {
+        setIsOpenValueX(false);
+      }
+    };
+
+    const handler3 = (event) => {
+      if (!menuValuesY.current.contains(event.target)) {
+        setIsOpenValueY(false);
+      }
+    };
+    
+    document.addEventListener('mousedown', handler1);
+    document.addEventListener('mousedown', handler2);
+    document.addEventListener('mousedown', handler3);
+
+    return () => {
+      document.removeEventListener('mousedown', handler1);
+      document.removeEventListener('mousedown', handler2);
+      document.removeEventListener('mousedown', handler3);
+    };
+  });
+
   return (
     <>
       <div className="info">
         <div className="info__name">Set your Dashboard</div>
         {selectedChart
         && selectedChart.y.length !== 0
-        && selectedChart.x.length !== 0
+        && selectedChart.x.length > 1
         && selectedChart.name.trim().length !== 0 ? (
             <Link to="/" className="info__link" onClick={add}>
               <div className="info__link-button">{updatedChart ? 'Update Widget' : 'Add Widget'}</div>
@@ -80,7 +113,7 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
           </div>
 
           {isOpenChart && (
-            <ul className="select__charts">
+            <ul className="select__charts" ref={menuCharts}>
               <li className="select__chart">
                 <div className="line-icon"></div>
                 <div
@@ -176,7 +209,7 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
               </div>
 
               {isOpenValueX && (
-                <ul className="select__values">
+                <ul className="select__values" ref={menuValuesX}>
                   {valuesX.map((v) => (
                     <li
                       key={v}
@@ -196,19 +229,19 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
               )}
             </div>
             <div className="button">
-              <div className="button__name">VALUE</div>
+              <div className="button__name">GROUP BY</div>
               <div
                 className="button__add"
                 onClick={() => setIsOpenValueY(!isOpenValueY)}
               >
                 <div className="button__add-name">
-                  {valueY.length === 0 ? 'Value' : valueY}
+                  {valueY.length === 0 ? 'Group by' : valueY}
                 </div>
                 <div className="button__add-icon"></div>
               </div>
 
               {isOpenValueY && (
-                <ul className="select__values">
+                <ul className="select__values" ref={menuValuesY}>
                   {valuesY.map((v) => (
                     <li
                       key={v}
@@ -278,19 +311,6 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
           </div>
         </div>
       )}
-
-      {/*updatedChart.length !== 0
-        && updatedChart.map((item) => (
-          <div key={item.id} className="add__chart">
-            <div className="chart">
-              <div className="chart__name">{item.name}</div>
-              <div className="chart-link">
-                <div className="chart__button"></div>
-              </div>
-            </div>
-            <Chart data={data} item={item} />
-          </div>
-        ))*/}
 
       {selectedChart && (
         <div className="add__chart">
