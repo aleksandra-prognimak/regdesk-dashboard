@@ -18,11 +18,11 @@ export const App = () => {
     { id: uuidv4(), name: 'Trackings', Component: AreaChart, x: 'trackings', y: 'createdAt' },
     { id: uuidv4(), name: 'Applications', Component: LineChart, x: 'applications', y: 'country' },
   ]);
-  const [updatedChart, setUpdatedChart] = useState([]);
+  const [updatedChart, setUpdatedChart] = useState(null);
   const [selectedId, setSelectedId] = useState(0);
 
   const updateChart = (id) =>
-    setUpdatedChart(charts.filter((item) => item.id === id));
+    setUpdatedChart(charts.find((item) => item.id === id));
 
   const deleteChart = (id) =>
     setCharts(charts.filter((item) => item.id !== id));

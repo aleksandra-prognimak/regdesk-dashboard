@@ -62,7 +62,6 @@ export const PieChart = ({ item }) => {
         width: 100,
         verticalScrollbar: am5.Scrollbar.new(root, {
           orientation: 'vertical',
-          width: 1,
         }),
       }),
     );

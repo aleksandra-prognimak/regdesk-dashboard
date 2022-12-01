@@ -10,7 +10,7 @@ import { data } from '../../data/data';
 import './AddPage.scss';
 
 export const AddPage = ({ updatedChart, charts, setCharts }) => {
-  const [selectedChart, setSelectedChart] = useState(null);
+  const [selectedChart, setSelectedChart] = useState(updatedChart ? updatedChart : null);
   const [isOpenChart, setIsOpenChart] = useState(false);
   const [isOpenValueY, setIsOpenValueY] = useState(false);
   const [isOpenValueX, setIsOpenValueX] = useState(false);
@@ -24,10 +24,15 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
   const [newName, setNewName] = useState('');
 
   const add = () => {
-    selectedChart
-      && selectedChart.y.length !== 0
-      && selectedChart.x.length !== 0
-      && setCharts([...charts, selectedChart]);
+    if (updatedChart) {
+      const index = charts.indexOf(updatedChart);
+
+      charts.splice(index, 1, selectedChart);
+
+      setCharts([...charts]);
+    } else {
+      setCharts([...charts, selectedChart]);
+    }
   };
 
   useEffect(() => {
@@ -52,11 +57,11 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
         && selectedChart.x.length !== 0
         && selectedChart.name.trim().length !== 0 ? (
             <Link to="/" className="info__link" onClick={add}>
-              <div className="info__link-button">Add Widget</div>
+              <div className="info__link-button">{updatedChart ? 'Update Widget' : 'Add Widget'}</div>
             </Link>
           ) : (
             <div className="info__link-disabled" onClick={add}>
-              <div className="info__link-button">Add Widget</div>
+              <div className="info__link-button">{updatedChart ? 'Update Widget' : 'Add Widget'}</div>
             </div>
           )}
       </div>
@@ -274,7 +279,7 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
         </div>
       )}
 
-      {updatedChart.length !== 0
+      {/*updatedChart.length !== 0
         && updatedChart.map((item) => (
           <div key={item.id} className="add__chart">
             <div className="chart">
@@ -285,7 +290,7 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
             </div>
             <Chart data={data} item={item} />
           </div>
-        ))}
+        ))*/}
 
       {selectedChart && (
         <div className="add__chart">
