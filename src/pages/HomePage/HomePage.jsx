@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Responsive, WidthProvider } from 'react-grid-layout';
-import { data } from '../../data/data';
 import { Link } from 'react-router-dom';
 import './HomePage.scss';
 import { Chart } from '../../components/Chart';
@@ -55,7 +54,7 @@ export const HomePage = ({ charts, updateChart, selectedId, setSelectedId, delet
     <>
       <div className="info">
         <div className="info__name">Dashboard</div>
-        <Link to="add" className="info__link">
+        <Link to="add" className="info__link" onClick={() => updateChart(null)}>
           <div className="info__link-button">Add Widget</div>
         </Link>
       </div>
@@ -84,7 +83,7 @@ export const HomePage = ({ charts, updateChart, selectedId, setSelectedId, delet
                 <div className="chart-link">
                   <div
                     onClick={() => handleDropdownClick(item.id)}
-                    className="chart__button"
+                    className="chart__button" 
                   ></div>
                   <div
                     className={`dropdown-items ${
@@ -113,7 +112,7 @@ export const HomePage = ({ charts, updateChart, selectedId, setSelectedId, delet
                   </div>
                 </div>
               </div>
-              <Chart item={item} data={data} updateChart={updateChart} />
+              <Chart item={item} updateChart={updateChart} />
             </div>
           );
         })}

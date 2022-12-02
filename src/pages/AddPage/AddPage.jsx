@@ -36,6 +36,8 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
     } else {
       setCharts([...charts, selectedChart]);
     }
+    
+    setSelectedChart(null);
   };
 
   useEffect(() => {

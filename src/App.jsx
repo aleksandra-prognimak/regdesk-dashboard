@@ -19,7 +19,7 @@ export const App = () => {
     { id: uuidv4(), name: 'Applications', Component: LineChart, x: 'applications', y: 'country' },
   ]);
   const [updatedChart, setUpdatedChart] = useState(null);
-  const [selectedId, setSelectedId] = useState(0);
+  const [selectedId, setSelectedId] = useState(null);
 
   const updateChart = (id) =>
     setUpdatedChart(charts.find((item) => item.id === id));

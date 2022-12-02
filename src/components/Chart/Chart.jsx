@@ -1,5 +1,5 @@
-export const Chart = ({ item, data }) => (
+export const Chart = ({ item }) => (
   <>
-    <item.Component data={data} item={item} />
+    <item.Component item={item} />
   </>
 );
