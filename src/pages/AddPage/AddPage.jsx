@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { AreaChart } from '../../components/AreaChart';
@@ -14,7 +14,7 @@ import { PieIcon } from '../../images/PieIcon';
 import { LineIcon } from '../../images/LineIcon';
 import './AddPage.scss';
 
-export const AddPage = ({ updatedChart, charts, setCharts }) => {
+const AddPageComp = ({ updatedChart, charts, setCharts }) => {
   const [selectedChart, setSelectedChart] = useState(updatedChart ? updatedChart : null);
   const [isOpenChart, setIsOpenChart] = useState(false);
   const [isOpenValueY, setIsOpenValueY] = useState(false);
@@ -22,7 +22,7 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
   const valuesY = ['country', 'createdAt', 'updatedAt'];
   const valuesX = ['products', 'checklists', 'trackings', 'applications'];
   const [valueY, setValueY] = useState('');
-  const [valueX, setValueX] = useState('');
+  const [valueX, setValueX] = useState(' ');
   const [chartName, setChartName] = useState('');
   const newNameField = useRef(null);
   const menuCharts = useRef();
@@ -128,10 +128,10 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
                   onClick={() => {
                     setSelectedChart({
                       id: uuidv4(),
-                      name: newName,
+                      name: selectedChart ? selectedChart.name : newName,
                       Component: LineChart,
-                      x: ' ',
-                      y: '',
+                      x: selectedChart ? selectedChart.x : valueX,
+                      y: selectedChart ? selectedChart.y : valueY,
                     });
                     setIsOpenChart(!isOpenChart);
                     setChartName('Line');
@@ -147,10 +147,10 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
                   onClick={() => {
                     setSelectedChart({
                       id: uuidv4(),
-                      name: newName,
+                      name: selectedChart ? selectedChart.name : newName,
                       Component: AreaChart,
-                      x: ' ',
-                      y: '',
+                      x: selectedChart ? selectedChart.x : valueX,
+                      y: selectedChart ? selectedChart.y : valueY,
                     });
                     setIsOpenChart(!isOpenChart);
                     setChartName('Area');
@@ -166,10 +166,10 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
                   onClick={() => {
                     setSelectedChart({
                       id: uuidv4(),
-                      name: newName,
+                      name: selectedChart ? selectedChart.name : newName,
                       Component: BarChart,
-                      x: ' ',
-                      y: '',
+                      x: selectedChart ? selectedChart.x : valueX,
+                      y: selectedChart ? selectedChart.y : valueY,
                     });
                     setIsOpenChart(!isOpenChart);
                     setChartName('Bar');
@@ -185,10 +185,10 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
                   onClick={() => {
                     setSelectedChart({
                       id: uuidv4(),
-                      name: newName,
+                      name: selectedChart ? selectedChart.name : newName,
                       Component: PieChart,
-                      x: ' ',
-                      y: '',
+                      x: selectedChart ? selectedChart.x : valueX,
+                      y: selectedChart ? selectedChart.y : valueY,
                     });
                     setIsOpenChart(!isOpenChart);
                     setChartName('Pie');
@@ -210,7 +210,7 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
                 onClick={() => setIsOpenValueX(!isOpenValueX)}
               >
                 <div className="button__add-name">
-                  {valueX.length === 0 ? 'Value' : valueX}
+                  {updatedChart ? selectedChart.x : valueX.length <= 1 ? 'Value' : valueX}
                 </div>
                 <div className="button__add-icon"><AddButtonIcon /></div>
               </div>
@@ -242,7 +242,7 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
                 onClick={() => setIsOpenValueY(!isOpenValueY)}
               >
                 <div className="button__add-name">
-                  {valueY.length === 0 ? 'Group by' : valueY}
+                  {updatedChart ? selectedChart.y : valueY.length === 0 ? 'Group by' : valueY}
                 </div>
                 <div className="button__add-icon"><AddButtonIcon /></div>
               </div>
@@ -301,7 +301,7 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
                     }}
                     onBlur={() => setClick(false)}
                   >
-                    {'Click to add name '}
+                    {selectedChart && selectedChart.name ? "Click to update name" : "Click to add name"}
                   </div>
                 </>
               )}
@@ -392,3 +392,5 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
     </>
   );
 };
+
+export const AddPage = React.memo(AddPageComp);
