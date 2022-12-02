@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/regdesk-dashboard/static/css/main.3f9e267d.css",
-    "main.js": "/regdesk-dashboard/static/js/main.f1e1fca1.js",
+    "main.js": "/regdesk-dashboard/static/js/main.14d20fee.js",
     "static/media/logo.svg": "/regdesk-dashboard/static/media/logo.900de5642e4ab9566e20.svg",
     "index.html": "/regdesk-dashboard/index.html",
     "main.3f9e267d.css.map": "/regdesk-dashboard/static/css/main.3f9e267d.css.map",
-    "main.f1e1fca1.js.map": "/regdesk-dashboard/static/js/main.f1e1fca1.js.map"
+    "main.14d20fee.js.map": "/regdesk-dashboard/static/js/main.14d20fee.js.map"
   },
   "entrypoints": [
     "static/css/main.3f9e267d.css",
-    "static/js/main.f1e1fca1.js"
+    "static/js/main.14d20fee.js"
   ]
 }
