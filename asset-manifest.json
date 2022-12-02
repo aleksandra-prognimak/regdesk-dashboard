@@ -1,24 +1,14 @@
 {
   "files": {
-    "main.css": "/regdesk-dashboard/static/css/main.d074a8df.css",
-    "main.js": "/regdesk-dashboard/static/js/main.7e7554a3.js",
+    "main.css": "/regdesk-dashboard/static/css/main.2ac51e69.css",
+    "main.js": "/regdesk-dashboard/static/js/main.efbc0034.js",
     "static/media/logo.svg": "/regdesk-dashboard/static/media/logo.900de5642e4ab9566e20.svg",
-    "static/media/bell-icon.svg": "/regdesk-dashboard/static/media/bell-icon.fefd5c84d69962d08183.svg",
-    "static/media/add-button-icon.svg": "/regdesk-dashboard/static/media/add-button-icon.925332daf9d9b2737576.svg",
-    "static/media/pie-icon.svg": "/regdesk-dashboard/static/media/pie-icon.302a3a49c09cecc3dd6d.svg",
-    "static/media/user-icon.svg": "/regdesk-dashboard/static/media/user-icon.7ef37baa724082365b87.svg",
     "index.html": "/regdesk-dashboard/index.html",
-    "static/media/dots-icon.svg": "/regdesk-dashboard/static/media/dots-icon.911269b7090ca5437725.svg",
-    "static/media/lang-icon.svg": "/regdesk-dashboard/static/media/lang-icon.94b0daceabc93ab2936d.svg",
-    "static/media/area-icon.svg": "/regdesk-dashboard/static/media/area-icon.6568877966c8e34601ff.svg",
-    "static/media/line-icon.svg": "/regdesk-dashboard/static/media/line-icon.c60f4c4f2aa60c245cf6.svg",
-    "static/media/close-icon.svg": "/regdesk-dashboard/static/media/close-icon.12ae007fbb72ed41ba95.svg",
-    "static/media/bar-icon.svg": "/regdesk-dashboard/static/media/bar-icon.4f9052264d471687680c.svg",
-    "main.d074a8df.css.map": "/regdesk-dashboard/static/css/main.d074a8df.css.map",
-    "main.7e7554a3.js.map": "/regdesk-dashboard/static/js/main.7e7554a3.js.map"
+    "main.2ac51e69.css.map": "/regdesk-dashboard/static/css/main.2ac51e69.css.map",
+    "main.efbc0034.js.map": "/regdesk-dashboard/static/js/main.efbc0034.js.map"
   },
   "entrypoints": [
-    "static/css/main.d074a8df.css",
-    "static/js/main.7e7554a3.js"
+    "static/css/main.2ac51e69.css",
+    "static/js/main.efbc0034.js"
   ]
 }
