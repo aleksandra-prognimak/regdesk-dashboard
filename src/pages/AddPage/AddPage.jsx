@@ -7,6 +7,11 @@ import { Chart } from '../../components/Chart';
 import { LineChart } from '../../components/LineChart';
 import { PieChart } from '../../components/PieChart';
 import { data } from '../../data/data';
+import { AreaIcon } from '../../images/AreaIcon';
+import { AddButtonIcon } from '../../images/AddButtonIcon';
+import { BarIcon } from '../../images/BarIcon';
+import { PieIcon } from '../../images/PieIcon';
+import { LineIcon } from '../../images/LineIcon';
 import './AddPage.scss';
 
 export const AddPage = ({ updatedChart, charts, setCharts }) => {
@@ -111,13 +116,13 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
             <div className="button__add-name">
               {chartName.length !== 0 ? chartName : 'Chart'}
             </div>
-            <div className="button__add-icon"></div>
+            <div className="button__add-icon"><AddButtonIcon /></div>
           </div>
 
           {isOpenChart && (
             <ul className="select__charts">
               <li className="select__chart">
-                <div className="line-icon"></div>
+                <div className="chart-icon"><LineIcon /></div>
                 <div
                   className="chart-name"
                   onClick={() => {
@@ -136,7 +141,7 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
                 </div>
               </li>
               <li className="select__chart">
-                <div className="area-icon"></div>
+                <div className="chart-icon"><AreaIcon /></div>
                 <div
                   className="chart-name"
                   onClick={() => {
@@ -155,7 +160,7 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
                 </div>
               </li>
               <li className="select__chart">
-                <div className="bar-icon"></div>
+                <div className="chart-icon"><BarIcon /></div>
                 <div
                   className="chart-name"
                   onClick={() => {
@@ -174,7 +179,7 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
                 </div>
               </li>
               <li className="select__chart">
-                <div className="pie-icon"></div>
+                <div className="chart-icon"><PieIcon /></div>
                 <div
                   className="chart-name"
                   onClick={() => {
@@ -207,7 +212,7 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
                 <div className="button__add-name">
                   {valueX.length === 0 ? 'Value' : valueX}
                 </div>
-                <div className="button__add-icon"></div>
+                <div className="button__add-icon"><AddButtonIcon /></div>
               </div>
 
               {isOpenValueX && (
@@ -239,7 +244,7 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
                 <div className="button__add-name">
                   {valueY.length === 0 ? 'Group by' : valueY}
                 </div>
-                <div className="button__add-icon"></div>
+                <div className="button__add-icon"><AddButtonIcon /></div>
               </div>
 
               {isOpenValueY && (
@@ -319,7 +324,6 @@ export const AddPage = ({ updatedChart, charts, setCharts }) => {
           <div className="chart">
             <div className="chart__name">{selectedChart.name}</div>
             <div className="chart-link">
-              <div className="chart__button"></div>
             </div>
           </div>
           {selectedChart.y === '' && selectedChart.x === '' && <Chart data={data} item={selectedChart} />}

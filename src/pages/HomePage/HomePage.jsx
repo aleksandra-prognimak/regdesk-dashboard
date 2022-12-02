@@ -3,6 +3,7 @@ import { Responsive, WidthProvider } from 'react-grid-layout';
 import { Link } from 'react-router-dom';
 import './HomePage.scss';
 import { Chart } from '../../components/Chart';
+import { DotsIcon } from '../../images/DotsIcon';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -84,7 +85,7 @@ export const HomePage = ({ charts, updateChart, selectedId, setSelectedId, delet
                   <div
                     onClick={() => handleDropdownClick(item.id)}
                     className="chart__button" 
-                  ></div>
+                  ><DotsIcon /></div>
                   <div
                     className={`dropdown-items ${
                       dropdownState && selectedId === item.id

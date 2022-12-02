@@ -72,36 +72,12 @@
   color: #212529;
 }
 
-.line-icon {
-  background-image: url(../../images/line-icon.svg);
-  background-size: cover;
-  background-repeat: no-repeat;
+.chart-icon {
   height: 18px;
   width: 18px;
-}
-
-.area-icon {
-  background-image: url(../../images/area-icon.svg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 18px;
-  width: 18px;
-}
-
-.bar-icon {
-  background-image: url(../../images/bar-icon.svg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 18px;
-  width: 18px;
-}
-
-.pie-icon {
-  background-image: url(../../images/pie-icon.svg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 18px;
-  width: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .select__values {
@@ -180,9 +156,6 @@
     }
 
     &-icon {
-      background-image: url(../../images/add-button-icon.svg);
-      background-repeat: no-repeat;
-      background-size: contain;
       height: 18px;
       width: 18px;
       margin-right: 18px;

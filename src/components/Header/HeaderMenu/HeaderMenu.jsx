@@ -7,21 +7,22 @@ import { DCTIcon } from '../../../images/DCTIcon';
 import { MDRegIcon } from '../../../images/MDRegIcon';
 import { PharmaRegIcon } from '../../../images/PharmaRegIcon';
 import { CCPIcon } from '../../../images/CCPIcon';
+import { CloseIcon } from '../../../images/CloseIcon';
 
 export const HeaderMenu = ({ setIsOpenMenu }) => {
   return (
     <ul className="menu" onClick={(event) => event.stopPropagation()}>
       <li className="menu__item">
-        <div className="menu__item-info">
+        <div className="menu__item-info" onClick={() => setIsOpenMenu(false)}>
           <div className="menu__item-icon">
             <HomeIcon />
           </div>
           <div className="menu__name">Dashboard</div>
         </div>
-        <div className="menu__close" onClick={() => setIsOpenMenu(false)}></div>
+        <div className="menu__close" onClick={() => setIsOpenMenu(false)}><CloseIcon /></div>
       </li>
       <li className="menu__item">
-        <div className="menu__item-info">
+        <div className="menu__item-info" onClick={() => setIsOpenMenu(false)}>
           <div className="menu__item-icon">
             <ProductIcon />
           </div>
@@ -29,43 +30,43 @@ export const HeaderMenu = ({ setIsOpenMenu }) => {
         </div>
       </li>
       <li className="menu__item">
-        <div className="menu__item-info">
+        <div className="menu__item-info" onClick={() => setIsOpenMenu(false)}>
           <div className="menu__item-icon"><DocumentsIcon /></div>
           <div className="menu__name">Documents</div>
         </div>
       </li>
       <li className="menu__item">
-        <div className="menu__item-info">
+        <div className="menu__item-info" onClick={() => setIsOpenMenu(false)}>
           <div className="menu__item-icon"><ApplicationsIcon /></div>
           <div className="menu__name">Applications</div>
         </div>
       </li>
       <li className="menu__item">
-        <div className="menu__item-info">
+        <div className="menu__item-info" onClick={() => setIsOpenMenu(false)}>
           <div className="menu__item-icon"><TrackingIcon /></div>
           <div className="menu__name">Tracking</div>
         </div>
       </li>
       <li className="menu__item">
-        <div className="menu__item-info">
+        <div className="menu__item-info" onClick={() => setIsOpenMenu(false)}>
           <div className="menu__item-icon"><DCTIcon /></div>
           <div className="menu__name">DCT</div>
         </div>
       </li>
       <li className="menu__item">
-        <div className="menu__item-info">
+        <div className="menu__item-info" onClick={() => setIsOpenMenu(false)}>
           <div className="menu__item-icon"><MDRegIcon /></div>
           <div className="menu__name">MD Reg</div>
         </div>
       </li>
       <li className="menu__item">
-        <div className="menu__item-info">
+        <div className="menu__item-info" onClick={() => setIsOpenMenu(false)}>
           <div className="menu__item-icon"><PharmaRegIcon /></div>
           <div className="menu__name">Pharma Reg</div>
         </div>
       </li>
       <li className="menu__item">
-        <div className="menu__item-info">
+        <div className="menu__item-info" onClick={() => setIsOpenMenu(false)}>
           <div className="menu__item-icon"><CCPIcon /></div>
           <div className="menu__name">CCP</div>
         </div>

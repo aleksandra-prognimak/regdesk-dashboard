@@ -109,12 +109,8 @@
   }
 
   &__button {
-    background-image: url(../../images/dots-icon.svg);
     height: 16px;
     width: 16px;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
     cursor: pointer;
   }
 }
