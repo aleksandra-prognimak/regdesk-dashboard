@@ -313,7 +313,7 @@ const AddPageComp = ({ updatedChart, charts, setCharts }) => {
                   <input
                     value={newName}
                     type="text"
-                    maxLength={40}
+                    maxLength={15}
                     ref={newNameField}
                     placeholder="Please enter a name"
                     className="input__name"
