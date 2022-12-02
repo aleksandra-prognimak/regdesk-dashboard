@@ -79,7 +79,7 @@ export const HomePage = ({ charts, updateChart, selectedId, setSelectedId, delet
               }}
             >
               <div className="chart">
-                <div className="chart__name">{item.name}</div>
+                <div className="chart__name">{item ? item.name : ''}</div>
 
                 <div className="chart-link">
                   <div

@@ -15,7 +15,9 @@ import { LineIcon } from '../../images/LineIcon';
 import './AddPage.scss';
 
 const AddPageComp = ({ updatedChart, charts, setCharts }) => {
-  const [selectedChart, setSelectedChart] = useState(updatedChart ? updatedChart : null);
+  const [selectedChart, setSelectedChart] = useState(
+    updatedChart ? updatedChart : null,
+  );
   const [isOpenChart, setIsOpenChart] = useState(false);
   const [isOpenValueY, setIsOpenValueY] = useState(false);
   const [isOpenValueX, setIsOpenValueX] = useState(false);
@@ -23,7 +25,14 @@ const AddPageComp = ({ updatedChart, charts, setCharts }) => {
   const valuesX = ['products', 'checklists', 'trackings', 'applications'];
   const [valueY, setValueY] = useState('');
   const [valueX, setValueX] = useState(' ');
-  const [chartName, setChartName] = useState('');
+  const [chartName, setChartName] = useState(
+    updatedChart
+      ? (selectedChart.Component === LineChart && 'Line')
+          || (selectedChart.Component === AreaChart && 'Area')
+          || (selectedChart.Component === BarChart && 'Bar')
+          || (selectedChart.Component === PieChart && 'Pie')
+      : '',
+  );
   const newNameField = useRef(null);
   const menuCharts = useRef();
   const menuValuesY = useRef();
@@ -41,7 +50,7 @@ const AddPageComp = ({ updatedChart, charts, setCharts }) => {
     } else {
       setCharts([...charts, selectedChart]);
     }
-    
+
     setSelectedChart(null);
   };
 
@@ -76,7 +85,7 @@ const AddPageComp = ({ updatedChart, charts, setCharts }) => {
         setIsOpenValueY(false);
       }
     };
-    
+
     document.addEventListener('mousedown', handler1);
     document.addEventListener('mousedown', handler2);
     document.addEventListener('mousedown', handler3);
@@ -97,11 +106,15 @@ const AddPageComp = ({ updatedChart, charts, setCharts }) => {
         && selectedChart.x.length > 1
         && selectedChart.name.trim().length !== 0 ? (
             <Link to="/" className="info__link" onClick={add}>
-              <div className="info__link-button">{updatedChart ? 'Update Widget' : 'Add Widget'}</div>
+              <div className="info__link-button">
+                {updatedChart ? 'Update Widget' : 'Add Widget'}
+              </div>
             </Link>
           ) : (
             <div className="info__link-disabled" onClick={add}>
-              <div className="info__link-button">{updatedChart ? 'Update Widget' : 'Add Widget'}</div>
+              <div className="info__link-button">
+                {updatedChart ? 'Update Widget' : 'Add Widget'}
+              </div>
             </div>
           )}
       </div>
@@ -116,13 +129,17 @@ const AddPageComp = ({ updatedChart, charts, setCharts }) => {
             <div className="button__add-name">
               {chartName.length !== 0 ? chartName : 'Chart'}
             </div>
-            <div className="button__add-icon"><AddButtonIcon /></div>
+            <div className="button__add-icon">
+              <AddButtonIcon />
+            </div>
           </div>
 
           {isOpenChart && (
             <ul className="select__charts">
               <li className="select__chart">
-                <div className="chart-icon"><LineIcon /></div>
+                <div className="chart-icon">
+                  <LineIcon />
+                </div>
                 <div
                   className="chart-name"
                   onClick={() => {
@@ -141,7 +158,9 @@ const AddPageComp = ({ updatedChart, charts, setCharts }) => {
                 </div>
               </li>
               <li className="select__chart">
-                <div className="chart-icon"><AreaIcon /></div>
+                <div className="chart-icon">
+                  <AreaIcon />
+                </div>
                 <div
                   className="chart-name"
                   onClick={() => {
@@ -160,7 +179,9 @@ const AddPageComp = ({ updatedChart, charts, setCharts }) => {
                 </div>
               </li>
               <li className="select__chart">
-                <div className="chart-icon"><BarIcon /></div>
+                <div className="chart-icon">
+                  <BarIcon />
+                </div>
                 <div
                   className="chart-name"
                   onClick={() => {
@@ -179,7 +200,9 @@ const AddPageComp = ({ updatedChart, charts, setCharts }) => {
                 </div>
               </li>
               <li className="select__chart">
-                <div className="chart-icon"><PieIcon /></div>
+                <div className="chart-icon">
+                  <PieIcon />
+                </div>
                 <div
                   className="chart-name"
                   onClick={() => {
@@ -210,13 +233,19 @@ const AddPageComp = ({ updatedChart, charts, setCharts }) => {
                 onClick={() => setIsOpenValueX(!isOpenValueX)}
               >
                 <div className="button__add-name">
-                  {updatedChart ? selectedChart.x : valueX.length <= 1 ? 'Value' : valueX}
+                  {updatedChart
+                    ? selectedChart.x
+                    : valueX.length <= 1
+                      ? 'Value'
+                      : valueX}
                 </div>
-                <div className="button__add-icon"><AddButtonIcon /></div>
+                <div className="button__add-icon">
+                  <AddButtonIcon />
+                </div>
               </div>
 
               {isOpenValueX && (
-                <ul className="select__values" >
+                <ul className="select__values">
                   {valuesX.map((v) => (
                     <li
                       key={v}
@@ -242,9 +271,15 @@ const AddPageComp = ({ updatedChart, charts, setCharts }) => {
                 onClick={() => setIsOpenValueY(!isOpenValueY)}
               >
                 <div className="button__add-name">
-                  {updatedChart ? selectedChart.y : valueY.length === 0 ? 'Group by' : valueY}
+                  {updatedChart
+                    ? selectedChart.y
+                    : valueY.length === 0
+                      ? 'Group by'
+                      : valueY}
                 </div>
-                <div className="button__add-icon"><AddButtonIcon /></div>
+                <div className="button__add-icon">
+                  <AddButtonIcon />
+                </div>
               </div>
 
               {isOpenValueY && (
@@ -301,7 +336,9 @@ const AddPageComp = ({ updatedChart, charts, setCharts }) => {
                     }}
                     onBlur={() => setClick(false)}
                   >
-                    {selectedChart && selectedChart.name ? "Click to update name" : "Click to add name"}
+                    {selectedChart && selectedChart.name
+                      ? 'Click to update name'
+                      : 'Click to add name'}
                   </div>
                 </>
               )}
@@ -323,10 +360,11 @@ const AddPageComp = ({ updatedChart, charts, setCharts }) => {
         <div className="add__chart">
           <div className="chart">
             <div className="chart__name">{selectedChart.name}</div>
-            <div className="chart-link">
-            </div>
+            <div className="chart-link"></div>
           </div>
-          {selectedChart.y === '' && selectedChart.x === '' && <Chart data={data} item={selectedChart} />}
+          {selectedChart.y === '' && selectedChart.x === '' && (
+            <Chart data={data} item={selectedChart} />
+          )}
           {selectedChart.y === '' && selectedChart.x === '' && (
             <Chart data={data} item={selectedChart} />
           )}
@@ -348,43 +386,53 @@ const AddPageComp = ({ updatedChart, charts, setCharts }) => {
           {selectedChart.y === 'country' && selectedChart.x === 'products' && (
             <Chart data={data} item={selectedChart} />
           )}
-          {selectedChart.y === 'country' && selectedChart.x === 'checklists' && (
+          {selectedChart.y === 'country'
+            && selectedChart.x === 'checklists' && (
             <Chart data={data} item={selectedChart} />
           )}
           {selectedChart.y === 'country' && selectedChart.x === 'trackings' && (
             <Chart data={data} item={selectedChart} />
           )}
-          {selectedChart.y === 'country' && selectedChart.x === 'applications' && (
+          {selectedChart.y === 'country'
+            && selectedChart.x === 'applications' && (
             <Chart data={data} item={selectedChart} />
           )}
           {selectedChart.y === 'createdAt' && selectedChart.x === '' && (
             <Chart data={data} item={selectedChart} />
           )}
-          {selectedChart.y === 'createdAt' && selectedChart.x === 'products' && (
+          {selectedChart.y === 'createdAt'
+            && selectedChart.x === 'products' && (
             <Chart data={data} item={selectedChart} />
           )}
-          {selectedChart.y === 'createdAt' && selectedChart.x === 'checklists' && (
+          {selectedChart.y === 'createdAt'
+            && selectedChart.x === 'checklists' && (
             <Chart data={data} item={selectedChart} />
           )}
-          {selectedChart.y === 'createdAt' && selectedChart.x === 'trackings' && (
+          {selectedChart.y === 'createdAt'
+            && selectedChart.x === 'trackings' && (
             <Chart data={data} item={selectedChart} />
           )}
-          {selectedChart.y === 'createdAt' && selectedChart.x === 'applications' && (
+          {selectedChart.y === 'createdAt'
+            && selectedChart.x === 'applications' && (
             <Chart data={data} item={selectedChart} />
           )}
           {selectedChart.y === 'updatedAt' && selectedChart.x === '' && (
             <Chart data={data} item={selectedChart} />
           )}
-          {selectedChart.y === 'updatedAt' && selectedChart.x === 'products' && (
+          {selectedChart.y === 'updatedAt'
+            && selectedChart.x === 'products' && (
             <Chart data={data} item={selectedChart} />
           )}
-          {selectedChart.y === 'updatedAt' && selectedChart.x === 'checklists' && (
+          {selectedChart.y === 'updatedAt'
+            && selectedChart.x === 'checklists' && (
             <Chart data={data} item={selectedChart} />
           )}
-          {selectedChart.y === 'updatedAt' && selectedChart.x === 'trackings' && (
+          {selectedChart.y === 'updatedAt'
+            && selectedChart.x === 'trackings' && (
             <Chart data={data} item={selectedChart} />
           )}
-          {selectedChart.y === 'updatedAt' && selectedChart.x === 'applications' && (
+          {selectedChart.y === 'updatedAt'
+            && selectedChart.x === 'applications' && (
             <Chart data={data} item={selectedChart} />
           )}
         </div>
