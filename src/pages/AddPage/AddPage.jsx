@@ -6,7 +6,6 @@ import { BarChart } from '../../components/BarChart';
 import { Chart } from '../../components/Chart';
 import { LineChart } from '../../components/LineChart';
 import { PieChart } from '../../components/PieChart';
-import { data } from '../../data/data';
 import { AreaIcon } from '../../images/AreaIcon';
 import { AddButtonIcon } from '../../images/AddButtonIcon';
 import { BarIcon } from '../../images/BarIcon';
@@ -314,6 +313,7 @@ const AddPageComp = ({ updatedChart, charts, setCharts }) => {
                   <input
                     value={newName}
                     type="text"
+                    maxLength={40}
                     ref={newNameField}
                     placeholder="Please enter a name"
                     className="input__name"
@@ -363,77 +363,77 @@ const AddPageComp = ({ updatedChart, charts, setCharts }) => {
             <div className="chart-link"></div>
           </div>
           {selectedChart.y === '' && selectedChart.x === '' && (
-            <Chart data={data} item={selectedChart} />
+            <Chart item={selectedChart} />
           )}
           {selectedChart.y === '' && selectedChart.x === '' && (
-            <Chart data={data} item={selectedChart} />
+            <Chart item={selectedChart} />
           )}
           {selectedChart.y === '' && selectedChart.x === 'products' && (
-            <Chart data={data} item={selectedChart} />
+            <Chart item={selectedChart} />
           )}
           {selectedChart.y === '' && selectedChart.x === 'checklists' && (
-            <Chart data={data} item={selectedChart} />
+            <Chart item={selectedChart} />
           )}
           {selectedChart.y === '' && selectedChart.x === 'trackings' && (
-            <Chart data={data} item={selectedChart} />
+            <Chart item={selectedChart} />
           )}
           {selectedChart.y === '' && selectedChart.x === 'applications' && (
-            <Chart data={data} item={selectedChart} />
+            <Chart item={selectedChart} />
           )}
           {selectedChart.y === 'country' && selectedChart.x === '' && (
-            <Chart data={data} item={selectedChart} />
+            <Chart item={selectedChart} />
           )}
           {selectedChart.y === 'country' && selectedChart.x === 'products' && (
-            <Chart data={data} item={selectedChart} />
+            <Chart item={selectedChart} />
           )}
           {selectedChart.y === 'country'
             && selectedChart.x === 'checklists' && (
-            <Chart data={data} item={selectedChart} />
+            <Chart item={selectedChart} />
           )}
           {selectedChart.y === 'country' && selectedChart.x === 'trackings' && (
-            <Chart data={data} item={selectedChart} />
+            <Chart item={selectedChart} />
           )}
           {selectedChart.y === 'country'
             && selectedChart.x === 'applications' && (
-            <Chart data={data} item={selectedChart} />
+            <Chart item={selectedChart} />
           )}
           {selectedChart.y === 'createdAt' && selectedChart.x === '' && (
-            <Chart data={data} item={selectedChart} />
+            <Chart item={selectedChart} />
           )}
           {selectedChart.y === 'createdAt'
             && selectedChart.x === 'products' && (
-            <Chart data={data} item={selectedChart} />
+            <Chart item={selectedChart} />
           )}
           {selectedChart.y === 'createdAt'
             && selectedChart.x === 'checklists' && (
-            <Chart data={data} item={selectedChart} />
+            <Chart item={selectedChart} />
           )}
           {selectedChart.y === 'createdAt'
             && selectedChart.x === 'trackings' && (
-            <Chart data={data} item={selectedChart} />
+            <Chart item={selectedChart} />
           )}
           {selectedChart.y === 'createdAt'
             && selectedChart.x === 'applications' && (
-            <Chart data={data} item={selectedChart} />
+            <Chart item={selectedChart} />
           )}
           {selectedChart.y === 'updatedAt' && selectedChart.x === '' && (
-            <Chart data={data} item={selectedChart} />
+            <Chart item={selectedChart} />
           )}
           {selectedChart.y === 'updatedAt'
             && selectedChart.x === 'products' && (
-            <Chart data={data} item={selectedChart} />
+            <Chart item={selectedChart} />
           )}
           {selectedChart.y === 'updatedAt'
             && selectedChart.x === 'checklists' && (
-            <Chart data={data} item={selectedChart} />
+            <Chart item={selectedChart} />
           )}
           {selectedChart.y === 'updatedAt'
             && selectedChart.x === 'trackings' && (
-            <Chart data={data} item={selectedChart} />
+            <Chart item={selectedChart} />
           )}
           {selectedChart.y === 'updatedAt'
             && selectedChart.x === 'applications' && (
-            <Chart data={data} item={selectedChart} />
+            <Chart item={selectedChart} />
           )}
         </div>
       )}

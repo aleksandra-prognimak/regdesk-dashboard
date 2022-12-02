@@ -34,7 +34,13 @@ const saveToLS = (key, value) => {
 
 const originalLayouts = getFromLS('layouts') || {};
 
-export const HomePage = ({ charts, updateChart, selectedId, setSelectedId, deleteChart }) => {
+export const HomePage = ({
+  charts,
+  updateChart,
+  selectedId,
+  setSelectedId,
+  deleteChart,
+}) => {
   const [layouts, setLayouts] = useState(
     JSON.parse(JSON.stringify(originalLayouts)),
   );
@@ -67,54 +73,58 @@ export const HomePage = ({ charts, updateChart, selectedId, setSelectedId, delet
       >
         {charts.map((item, index) => {
           return (
-            <div
-              key={item.id}
-              data-grid={{
-                w: 4,
-                h: 8,
-                x: (index % 3) * 4,
-                y: Math.floor(index / 3),
-                minW: 4,
-                minH: 8,
-              }}
-            >
-              <div className="chart">
-                <div className="chart__name">{item ? item.name : ''}</div>
+            item && (
+              <div
+                key={item.id}
+                data-grid={{
+                  w: 4,
+                  h: 8,
+                  x: (index % 3) * 4,
+                  y: Math.floor(index / 3),
+                  minW: 4,
+                  minH: 8,
+                }}
+              >
+                <div className="chart">
+                  <div className="chart__name">{item ? item.name : ''}</div>
 
-                <div className="chart-link">
-                  <div
-                    onClick={() => handleDropdownClick(item.id)}
-                    className="chart__button" 
-                  ><DotsIcon /></div>
-                  <div
-                    className={`dropdown-items ${
-                      dropdownState && selectedId === item.id
-                        ? 'isVisible'
-                        : 'isHidden'
-                    }`}
-                  >
-                    <div className="dropdown-item">
-                      <Link
-                        to="add"
-                        className="dropdown__link"
-                        onClick={() => updateChart(item.id)}
-                      >
-                        Update
-                      </Link>
+                  <div className="chart-link">
+                    <div
+                      onClick={() => handleDropdownClick(item ? item.id : 0)}
+                      className="chart__button"
+                    >
+                      <DotsIcon />
                     </div>
-                    <div className="dropdown-item">
-                      <div
-                        className="dropdown__link"
-                        onClick={() => deleteChart(item.id)}
-                      >
-                        Delete
+                    <div
+                      className={`dropdown-items ${
+                        dropdownState && selectedId === item.id
+                          ? 'isVisible'
+                          : 'isHidden'
+                      }`}
+                    >
+                      <div className="dropdown-item">
+                        <Link
+                          to="add"
+                          className="dropdown__link"
+                          onClick={() => updateChart(item.id)}
+                        >
+                          Update
+                        </Link>
+                      </div>
+                      <div className="dropdown-item">
+                        <div
+                          className="dropdown__link"
+                          onClick={() => deleteChart(item.id)}
+                        >
+                          Delete
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
+                <Chart item={item} updateChart={updateChart} />
               </div>
-              <Chart item={item} updateChart={updateChart} />
-            </div>
+            )
           );
         })}
       </ResponsiveReactGridLayout>
