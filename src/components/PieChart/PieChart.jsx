@@ -5,7 +5,7 @@ import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
 import { v4 as uuidv4 } from 'uuid';
 import { getData } from '../../utils/getData';
 
-export const PieChart = ({ item }) => {
+const PieChartComp = ({ item }) => {
   const data = getData(item);
 
   const id = uuidv4();
@@ -76,3 +76,5 @@ export const PieChart = ({ item }) => {
 
   return <div id={id} style={{ width: '100%', height: '80%' }}></div>;
 };
+
+export const PieChart = React.memo(PieChartComp);

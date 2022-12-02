@@ -5,7 +5,7 @@ import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
 import { v4 as uuidv4 } from 'uuid';
 import { getData } from '../../utils/getData';
 
-export const LineChart = ({ item }) => {
+const LineChartComp = ({ item }) => {
   const seriesRef = useRef(null);
   const xAxisRef = useRef(null);
 
@@ -102,3 +102,5 @@ export const LineChart = ({ item }) => {
 
   return <div id={id} style={{ width: '100%', height: '85%' }}></div>;
 };
+
+export const LineChart = React.memo(LineChartComp);

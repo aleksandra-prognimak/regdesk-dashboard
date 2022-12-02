@@ -5,7 +5,7 @@ import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
 import { v4 as uuidv4 } from 'uuid';
 import { getData } from '../../utils/getData';
 
-export const BarChart = ({ item }) => {
+const BarChartComp = ({ item }) => {
   const seriesRef = useRef(null);
   const xAxisRef = useRef(null);
 
@@ -101,3 +101,5 @@ export const BarChart = ({ item }) => {
 
   return <div id={id} style={{ width: '100%', height: '85%' }}></div>;
 };
+
+export const BarChart = React.memo(BarChartComp);
