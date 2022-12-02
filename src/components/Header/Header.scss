@@ -97,10 +97,6 @@
     border-radius: 8px;
     position: relative;
 
-    &:active {
-      background-color: $MainNavyBlue;
-    }
-
     &-link {
       display: flex;
       justify-content: center;
@@ -112,6 +108,10 @@
 
       &:hover {
         background-color: $SecondaryNavyBlue;
+      }
+
+      &:active {
+        background-color: $MainNavyBlue;
       }
     }
   }
