@@ -26,10 +26,12 @@ export const App = () => {
 
   const deleteChart = (id) =>
     setCharts(charts.filter((item) => item.id !== id));
+    
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
 
   return (
     <div className="App">
-      <Header />
+      <Header isOpenMenu={isOpenMenu} setIsOpenMenu={setIsOpenMenu}/>
       <div className="container">
         <Routes>
           <Route
@@ -49,6 +51,7 @@ export const App = () => {
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>
+      {isOpenMenu && <div className="modal" onClick={() => setIsOpenMenu(false)}></div>}
     </div>
   );
 };

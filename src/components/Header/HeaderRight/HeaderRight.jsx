@@ -1,23 +1,11 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { HomeIcon } from '../../../images/HomeIcon';
+import { HeaderMenu } from '../HeaderMenu';
+import { Time } from './Time';
 
-export const HeaderRight = () => {
-  const [date, setDate] = useState();
-
-  useEffect(() => {
-    setInterval(() => {
-      const newDate = new Date();
-
-      setDate(newDate.toLocaleString());
-    });
-  });
-
+export const HeaderRight = ({ isOpenMenu, setIsOpenMenu }) => {
   return (
     <div className="header__right">
-      <div className="header__date">
-        <div className="header__date-name">Server time</div>
-        <div className="header__date-time">{date}</div>
-      </div>
+      <Time />
       <div className="header__bell">
         <div className="header__bell-mail">13</div>
       </div>
@@ -29,10 +17,21 @@ export const HeaderRight = () => {
         <div className="header__user-icon"></div>
         <div className="header__user-name">John Dou</div>
       </div>
-      <div className="header__home">
-        <Link to="/" className="header__home-link">
-          <div className="header__button"></div>
-        </Link>
+      <div
+        className="header__home"
+        onClick={(event) => {
+          setIsOpenMenu(!isOpenMenu);
+          event.stopPropagation();
+        }}
+      >
+        <div className="header__home-link">
+          <div className="header__button">
+            <HomeIcon />
+          </div>
+        </div>
+        {isOpenMenu && (
+          <HeaderMenu isOpenMenu={isOpenMenu} setIsOpenMenu={setIsOpenMenu} />
+        )}
       </div>
     </div>
   );

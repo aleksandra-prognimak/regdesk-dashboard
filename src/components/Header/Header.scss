@@ -107,11 +107,7 @@
     height: 50px;
     width: 50px;
     border-radius: 8px;
-    transition: all 0.3s;
-
-    &:hover {
-      background-color: $SecondaryNavyBlue;
-    }
+    position: relative;
 
     &:active {
       background-color: $MainNavyBlue;
@@ -123,15 +119,89 @@
       align-items: center;
       height: 50px;
       width: 50px;
+      border-radius: 8px;
+      transition: all 0.3s;
+
+      &:hover {
+        background-color: $SecondaryNavyBlue;
+      }
     }
   }
 
   &__button {
-    background-image: url(../../images/home-icon.svg);
+    color: $White;
     height: 22px;
     width: 22px;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+  }
+}
+
+.modal {
+  height: 100vh;
+  width: 100vw;
+  background-color: #c7dbea;
+  opacity: 0.6;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.menu {
+  background-color: $MainNavyBlue;
+  position: absolute;
+  right: 0;
+  top: 58px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 8px;
+
+  &__item {
+    color: $White;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-info {
+      width: 166px;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        background-color: $TertiaryBlue;
+        color: $MainNavyBlue;
+        border-radius: 8px;
+      }
+    }
+
+    &-icon {
+      height: 22px;
+      width: 22px;
+      margin-right: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &__close {
+    background-image: url(../../images/close-icon.svg);
+    height: 20px;
+    width: 20px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0 8px 0 16px;
+    cursor: pointer;
   }
 }
